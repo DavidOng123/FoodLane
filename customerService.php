@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="CSS/style.css">
    <link rel="stylesheet" href="CSS/bootstrap.min.css">
   <style>
+      
       a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
@@ -105,6 +106,15 @@ label.error {
   font-size: 12px;
   color: #000; }
 
+input[type=text]{
+    
+    color:#eeeeee;
+    outline: none;
+    outline-style: none;
+    
+    padding: 3px 10px; 
+}
+
   </style>
 </head>
 
@@ -127,7 +137,7 @@ label.error {
               <form class="mb-5" method="post" id="contactForm" name="contactForm">
                 <div class="row">
                   <div class="col-md-6 form-group">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
+                      <input type="text" class="form-control" name="name" id="name" placeholder="Your name" >
                   </div>
                   <div class="col-md-6 form-group">
                     <input type="text" class="form-control" name="email" id="email" placeholder="Email">
@@ -155,13 +165,13 @@ label.error {
           </div>
             <div class="row mb-5">
             <div class="col-md-4 mr-auto">
-              <h3 class="thin-heading mb-4">New York</h3>
+              <h3 class="thin-heading mb-4">Malaysia</h3>
               <p>9757 Aspen Lane
 South Richmond Hill, NY 11419</p>
             </div>
             <div class="col-md-6 ml-auto">
               <h3 class="thin-heading mb-4">Contact Info</h3>
-              <p>T: +1 (291) 939 9321 <br> E: info@mywebsite.com</p>
+              <p>T: +60124596889 <br> E: foodlane@mywebsite.com</p>
             </div>
           </div>
         </div>
@@ -170,8 +180,6 @@ South Richmond Hill, NY 11419</p>
 
   </div>
     
-    
-
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
