@@ -25,7 +25,7 @@
           <a href="#"><i class="uil uil-document-layout-left"></i> Shop</a>
           <a href="team.php"><i class="uil uil-compass"></i> About</a>
           <a href="customerService.php"><i class="uil uil-envelope"></i> Contact Us</a>
-          <a href="#"><i class="bi bi-person-circle"></i>Account </a>
+          <a href="login.php"><i class="bi bi-person-circle"></i>Account </a>
         </div>
       </div>
       <i class="uil uil-apps nav-menu-btn"></i>
