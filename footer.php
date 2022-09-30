@@ -14,13 +14,29 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
 
+    
+    
+    <style>
+/*    .footer {
+   position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+     }*/
+    </style>
+    
+    
+    
 </head>
 
 
 <body>
 
   <!-- Remove the container if you want to extend the Footer to full width. -->
-    <div class="">
+    <div class="footer">
 
       <footer class="bg-primary text-center text-lg-start text-white">
           
