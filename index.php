@@ -116,20 +116,9 @@
     <?php require_once ('header.php'); ?>
     
     
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     
-    <center>
+    
+  <center>
     <h2>Customer <b>Review</b></h2>
     <hr width="15%" color="red"  size="5px" />
     </center>
@@ -199,6 +188,7 @@
   </div>
   <!--End What-Customer-Say Section-->
 
+  
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
 
