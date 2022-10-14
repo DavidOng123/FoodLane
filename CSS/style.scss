@@ -1,0 +1,114 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/style.scss to edit this template
+*/
+/*
+    Created on : 27 Sept 2022, 13:41:07
+    Author     : tanzi
+*/
+
+.food_section {
+
+  .filters_menu {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+    margin: 45px 0 20px 0;
+
+    li {
+      padding: 7px 25px;
+      cursor: pointer;
+      border-radius: 25px;
+
+      &.active {
+        background-color: $primary2;
+        color: $white;
+      }
+    }
+  }
+
+  .box {
+    position: relative;
+    margin-top: 25px;
+    background-color: $white;
+    border-radius: 10px;
+    color: $white;
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #f1f2f3 25px, $primary2 25px);
+
+    .img-box {
+      background: #f1f2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 215px;
+      border-radius: 0 0 0 45px;
+      margin: -1px;
+      padding: 25px;
+
+      img {
+        max-width: 100%;
+        max-height: 145px;
+        transition: all .2s;
+      }
+    }
+
+    .detail-box {
+      padding: 25px;
+
+      h5 {
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 15px;
+      }
+
+      h6 {
+        margin-top: 10px;
+      }
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background: $primary1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          width: 18px;
+          height: auto;
+          fill: $white;
+        }
+      }
+    }
+
+    &:hover {
+      .img-box {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .btn-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+
+    a {
+      @include hero_btn($primary1, $white, 10px, 55px, 45px);
+    }
+  }
+}
