@@ -342,35 +342,36 @@ function showSlides() {
 }
 </script>
 
+
 <br>
 <br>
 <br>
 
 <section class="categories">
         <div class="container">
-            <h2 class="text-center">Categories</h2>
+            <h1 class="text-center">Categories</h1>
 
-            <a href="category-foods.html">
+            <a href="food.php">
             <div class="box-3 float-container">
-                <img src="1.jpg" alt="Pizza" class="img-responsive img-curve">
+                <img src="images/1.jpg" alt="Food" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Pizza</h3>
+                <h3 class="float-text text-white">Food</h3>
             </div>
             </a>
 
-            <a href="#">
+            <a href="drink.php">
             <div class="box-3 float-container">
-                <img src="3.jpg" alt="Burger" class="img-responsive img-curve">
+                <img src="images/3.jpg" alt="Drink" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Burger</h3>
+                <h3 class="float-text text-white">Drink</h3>
             </div>
             </a>
 
-            <a href="#">
+            <a href="merchandise.php">
             <div class="box-3 float-container">
-                <img src="4.jpg" alt="Momo" class="img-responsive img-curve">
+                <img src="images/4.jpg" alt="Merchandise" class="img-responsive img-curve">
 
-                <h3 class="float-text text-white">Momo</h3>
+                <h3 class="float-text text-white">Merchandise</h3>
             </div>
             </a>
 
@@ -380,142 +381,6 @@ function showSlides() {
         </div>
     </section>
 
-<section class="products" id="products">
-
-    <h1 class="text-center">Food</h1>
-
-    <div class="box-container">
-
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#
-                       " class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-20%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-17%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-3%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-18%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-    </div>
-
-</section>
 </body>
 <?php require_once 'footer.php' ?>
 </html>

@@ -175,10 +175,15 @@ input:-moz-placeholder { /* Firefox 18- */
 
 <?php require_once 'header.php'; ?>
 
+<?php
+require 'db.php';
+?>
+
+
 <body class="form-v5">
 	<div class="page-content">
 		<div class="form-v5-content">
-			<form class="form-detail" action="#" method="post">
+			<form class="form-detail" action="validation.php" method="post">
 				<h2>Sign In</h2>
 				<div class="form-row">
 					<label for="your-email">Your Email</label>
