@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
+   <!--Icon-->
+   <link rel="icon" href="Image/FOOD.ico" /> 
+
 </head>
 
 
@@ -26,8 +29,7 @@
           <a href="team.php"><i class="uil uil-compass"></i> About</a>
           <a href="customerService.php"><i class="uil uil-envelope"></i> Contact Us</a>
           <a href="login.php"><i class="bi bi-person-circle"></i>Account </a>
-          <a href="logout.php"><i class="uil uil-mailbox"></i>Logout</a>
-        </div>
+       </div>
       </div>
       <i class="uil uil-apps nav-menu-btn"></i>
     </div>
@@ -39,7 +41,6 @@
       
   </header>
     
-    <br>
     <br>
 
     
