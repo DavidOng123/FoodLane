@@ -1,3 +1,10 @@
+<?php
+session_start();
+include("server.php");
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -98,45 +105,85 @@
                 
                 
                  <main>
+                     
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
+                        
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <div class="card-body" ><i class="fas fa-concierge-bell"></i> Total Reservation</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">                                      
+                                        <a>
+                                         <?php
+                                            $query ="SELECT reserve_id FROM reservation ORDER BY reserve_id";
+                                            $query_run = mysqli_query($con,$query);
+
+                                            $row = mysqli_num_rows($query_run);
+                                            
+                                            echo "<h5>$row</h5>"                                                   
+                                        ?>   
+                                        
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-body"> <i class="fas fa-user-plus"></i> User Registrations</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                       <a>
+                                         <?php
+                                            $query ="SELECT CustID FROM customer ORDER BY CustID";
+                                            $query_run = mysqli_query($con,$query);
+
+                                            $row = mysqli_num_rows($query_run);
+                                            
+                                            echo "<h5>$row</h5>"                                                   
+                                        ?>                                          
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
+                                    <div class="card-body"><i class="far fa-money-bill-alt"></i> Total Sales Amount</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                        <a>
+                                         <?php
+                                            $query ="SELECT Total FROM payment";
+                                            $query_run = mysqli_query($con,$query);
+
+                                            $row = mysqli_num_rows($query_run);
+                                            
+                                            echo "<h5>$row</h5>"                                                   
+                                        ?>   
+                                        
+                                        </a>
+                                       
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
+                                    <div class="card-body"><i class="far fa-credit-card	"></i> 
+                                        Total Number of Transaction</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                        <a>
+                                         <?php
+                                            $query ="SELECT OrderID FROM order_table ORDER BY OrderID";
+                                            $query_run = mysqli_query($con,$query);
+
+                                            $row = mysqli_num_rows($query_run);
+                                            
+                                            echo "<h5>$row</h5>"                                                   
+                                        ?>   
+                                        
+                                        </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -689,7 +736,7 @@
       }).then((result) => {
         if (result.isConfirmed) {
             
-          window.location.href="../index.php";
+          window.location.href="login.php";
           
         }
       })       
