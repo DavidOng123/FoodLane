@@ -131,6 +131,7 @@
     <br>
     
 <center><p>Choose a table you preferred by clicking on the table available.<p></center>
+               
     
     <div class="floorplan-container">
         <div class="showcase" style="display:flex;">
@@ -159,27 +160,82 @@
             <div class="cashier"><small>Cashier</small></div>
         </div>
             <div class="row">
-                <div class="twin-seat unavailable" data-value="A1"><small>A1</small></div>
-                <div class="seat unavailable" data-value="B1"><small>B1</small></div>
-                <div class="seat available" data-value="B4"><small>B4</small></div>
-                <div class="seat unavailable" data-value="B7"><small>B7</small></div>
-                <div class="twin-seat unavailable" data-value="A4"><small>A4</small></div>
+                <div class="twin-seat" data-value="A1"><small>A1</small></div>
+                <div class="seat" data-value="B1"><small>B1</small></div>
+                <div class="seat" data-value="B4"><small>B4</small></div>
+                <div class="seat" data-value="B7"><small>B7</small></div>
+                <div class="twin-seat" data-value="A4"><small>A4</small></div>
             </div><div class="row">
-                <div class="twin-seat unavailable" data-value="A2"><small>A2</small></div>
-                <div class="seat available" data-value="B2"><small>B2</small></div>
-                <div class="seat unavailable" data-value="B5"><small>B5</small></div>
-                <div class="seat unavailable" data-value="B8"><small>B8</small></div>
-                <div class="twin-seat unavailable" data-value="A5"><small>A5</small></div>
+                <div class="twin-seat" data-value="A2"><small>A2</small></div>
+                <div class="seat" data-value="B2"><small>B2</small></div>
+                <div class="seat" data-value="B5"><small>B5</small></div>
+                <div class="seat" data-value="B8"><small>B8</small></div>
+                <div class="twin-seat" data-value="A5"><small>A5</small></div>
             </div>
             <div class="row">
-                <div class="twin-seat unavailable" data-value="A3"><small>A3</small></div>
-                <div class="seat unavailable" data-value="B3"><small>B3</small></div>
-                <div class="seat unavailable" data-value="B6"><small>B6</small></div>
-                <div class="seat available" data-value="B9"><small>B9</small></div>
-                <div class="twin-seat unavailable" data-value="A6"><small>A6</small></div>
+                <div class="twin-seat" data-value="A3"><small>A3</small></div>
+                <div class="seat" data-value="B3"><small>B3</small></div>
+                <div class="seat" data-value="B6"><small>B6</small></div>
+                <div class="seat" data-value="B9"><small>B9</small></div>
+                <div class="twin-seat" data-value="A6"><small>A6</small></div>
             </div>
         
     </div>
+ <?php  
+                    
+                   
+                    $date=$_POST['date'];
+                    $time=$_POST['time'];
+                    $pax=$_POST['pax'];
+                    
+                    
+                    
+                    $array= json_decode($API->getReservation(),true);
+                    $occupied=array();
+                    foreach ($array as $a){
+                        $occupied[]= $a['TableNo'];
+                        
+                    }
+                    
+                    
+                    
+                    if($pax>0 && $pax<=2){?>
+                        <script>
+                            var array=<?php echo json_encode($occupied)?>;
+                       const seat=document.querySelectorAll('.twin-seat');
+                       for(var i=0;i<seat.length;i++){
+                            for(var y=0;y<array.length;y++){
+                                if(array[y] == seat[i].getAttribute('data-value')){
+                            seat[i].classList.toggle('unavailable');
+                            
+                        }}
+                        if(!seat[i].classList.contains('unavailable')){
+                            seat[i].classList.toggle('available');
+                        }
+                        }</script><?php }?>
+                    
+                    <?php if($pax>2 && $pax<=4){ ?>
+                        <script>
+                            var array=<?php echo json_encode($occupied)?>;
+                       const seat=document.querySelectorAll('.seat');
+                       for(var i=0;i<seat.length;i++){
+                            for(var y=0;y<array.length;y++){
+                                if(array[y] == seat[i].getAttribute('data-value')){
+                            seat[i].classList.toggle('unavailable');
+                            
+                        }}
+                        if(!seat[i].classList.contains('unavailable')){
+                            seat[i].classList.toggle('available');
+                        }
+                        }
+                            
+                               
+                       
+                    
+                    
+                    </script><?php }?>
+                    
+                    
 <center><p>You have selected the tables of<span id="tableNo"></span>.<p></center>
  
     <script>
@@ -187,7 +243,8 @@
         console.log(data);
         const floorplan_container=document.querySelector('.floorplan-container');
         const seats=document.querySelectorAll('.seat.available');
-        console.log(seats);
+        const available_twin=document.querySelectorAll('.twin-seat.available');
+        
         const tableNo=document.getElementById('tableNo');
         function updateSelectedCount(x){
             const selectedSeats=document.querySelectorAll('.row .seat.selected');
@@ -197,7 +254,13 @@
             console.log(tableNo.innerText);
             
             for(var i=0;i<seats.length;i++){
-                seats[i].classList.toggle('available');}
+                seats[i].classList.toggle('available');
+            }
+            for(var i=0;i<available_twin.length;i++){
+                available_twin[i].classList.toggle('available')
+            }
+            
+            
         }
         
         floorplan_container.addEventListener('click',(e)=>{
