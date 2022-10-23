@@ -130,6 +130,8 @@
     <br>
     <br>
     
+<center><p>Choose a table you preferred by clicking on the table available.<p></center>
+    
     <div class="floorplan-container">
         <div class="showcase" style="display:flex;">
             <div style="margin-left: 150px;margin-top: 30px;  ">
@@ -157,41 +159,66 @@
             <div class="cashier"><small>Cashier</small></div>
         </div>
             <div class="row">
-                <div class="twin-seat available"><small>A1</small></div>
-                <div class="seat unavailable"><small>B1</small></div>
-                <div class="seat available"><small>B4</small></div>
-                <div class="seat unavailable"><small>B7</small></div>
-                <div class="twin-seat unavailable"><small>A4</small></div>
+                <div class="twin-seat unavailable" data-value="A1"><small>A1</small></div>
+                <div class="seat unavailable" data-value="B1"><small>B1</small></div>
+                <div class="seat available" data-value="B4"><small>B4</small></div>
+                <div class="seat unavailable" data-value="B7"><small>B7</small></div>
+                <div class="twin-seat unavailable" data-value="A4"><small>A4</small></div>
             </div><div class="row">
-                <div class="twin-seat available"><small>A2</small></div>
-                <div class="seat available"><small>B2</small></div>
-                <div class="seat unavailable"><small>B5</small></div>
-                <div class="seat unavailable"><small>B8</small></div>
-                <div class="twin-seat unavailable"><small>A5</small></div>
+                <div class="twin-seat unavailable" data-value="A2"><small>A2</small></div>
+                <div class="seat available" data-value="B2"><small>B2</small></div>
+                <div class="seat unavailable" data-value="B5"><small>B5</small></div>
+                <div class="seat unavailable" data-value="B8"><small>B8</small></div>
+                <div class="twin-seat unavailable" data-value="A5"><small>A5</small></div>
             </div>
             <div class="row">
-                <div class="twin-seat unavailable"><small>A3</small></div>
-                <div class="seat unavailable"><small>B3</small></div>
-                <div class="seat unavailable"><small>B6</small></div>
-                <div class="seat available"><small>B9</small></div>
-                <div class="twin-seat unavailable"><small>A6</small></div>
+                <div class="twin-seat unavailable" data-value="A3"><small>A3</small></div>
+                <div class="seat unavailable" data-value="B3"><small>B3</small></div>
+                <div class="seat unavailable" data-value="B6"><small>B6</small></div>
+                <div class="seat available" data-value="B9"><small>B9</small></div>
+                <div class="twin-seat unavailable" data-value="A6"><small>A6</small></div>
             </div>
         
     </div>
+<center><p>You have selected the tables of<span id="tableNo"></span>.<p></center>
+ 
     <script>
         var data=<?php echo json_encode($API->getReservation());?>;
-        console.log(data)
+        console.log(data);
         const floorplan_container=document.querySelector('.floorplan-container');
         const seats=document.querySelectorAll('.seat.available');
-
+        console.log(seats);
+        const tableNo=document.getElementById('tableNo');
+        function updateSelectedCount(x){
+            const selectedSeats=document.querySelectorAll('.row .seat.selected');
+           
+            tableNo.innerText=" "+x;
+        
+            console.log(tableNo.innerText);
+            
+            for(var i=0;i<seats.length;i++){
+                seats[i].classList.toggle('available');}
+        }
+        
         floorplan_container.addEventListener('click',(e)=>{
+                   
            if(e.target.classList.contains('seat') && !e.target.classList.contains('unavailable')){
-               e.target.className="seat selected"
+             
+               e.target.classList.toggle('selected');
+               
+              updateSelectedCount(e.target.getAttribute('data-value'));
            } 
            if(e.target.classList.contains('twin-seat') && !e.target.classList.contains('unavailable')){
-               e.target.className="twin-seat selected"
-           } 
+                e.target.classList.toggle('selected');
+              updateSelectedCount(e.target.getAttribute('data-value'));
+           }
+           
         });
+    
+        
+        
+        
+      
 
     </script>
     
