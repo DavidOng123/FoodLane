@@ -184,49 +184,153 @@
  <?php  
                     
                    
-                    $date=$_POST['date'];
+                    $date= $_POST['date'];
                     $time=$_POST['time'];
                     $pax=$_POST['pax'];
-                    
+                    $date=$_POST['date'];
                     
                     
                     $array= json_decode($API->getReservation(),true);
                     $occupied=array();
+                    $occupied_time=array();
+                    $occupied_date=array();
+                    $occupied_pax=array();
                     foreach ($array as $a){
+                        $occupied_pax[]=$a['Pax'];
                         $occupied[]= $a['TableNo'];
-                        
+                        $occupied_time[]=$a['Time'];
+                        $occupied_date[]= $a['Date'];
                     }
-                    
+                    $date= strval($date);
+                    $time= strval($time);
                     
                     
                     if($pax>0 && $pax<=2){?>
                         <script>
-                            var array=<?php echo json_encode($occupied)?>;
-                       const seat=document.querySelectorAll('.twin-seat');
-                       for(var i=0;i<seat.length;i++){
-                            for(var y=0;y<array.length;y++){
-                                if(array[y] == seat[i].getAttribute('data-value')){
-                            seat[i].classList.toggle('unavailable');
+                            class Reserved{
+                              
+                                constructor(pax,tableNo,date,time){
+                                    this.pax=pax;
+                                    this.tableNo=tableNo;
+                                    this.date=date;
+                                    this.time=time;
+                                }
+                                getPax(){
+                                    return this.pax;
+                                }
+                                getTable(){
+                                    return this.tableNo;
+                                }
+                                getDate(){
+                                    return this.date;
+                                }
+                                getTime(){
+                                    return this.time;
+                                }
+                            }
                             
-                        }}
-                        if(!seat[i].classList.contains('unavailable')){
-                            seat[i].classList.toggle('available');
+                            var array=<?php echo json_encode($occupied)?>;
+                            var time_array=<?php echo json_encode($occupied_time)?>;
+                            var date_array=<?php echo json_encode($occupied_date)?>;
+                            var pax_array=<?php echo json_encode($occupied_pax)?>;
+                            var date=<?php echo json_encode($date)?>;
+                            var time=<?php echo json_encode($time)?>;
+                            let dt=new Date(date+'T'+time);
+                            const reserved_array=[];
+                            for(var i=0;i<array.length;i++){
+                                
+                                if(pax_array[i]<=2)
+                                reserved_array.push(new Reserved(pax_array[i],array[i],date_array[i],time_array[i]));
+                            }
+                            console.log(reserved_array);
+                       const seat=document.querySelectorAll('.twin-seat');
+                       
+                            for(var y=0;y<reserved_array.length;y++){
+                                
+                                if(reserved_array[y].getDate()==date){
+                                    
+                                    var pre_time=new Date(dt.getTime()-30*60*1000);
+                                    var post_time=new Date(dt.getTime()+30*60*1000);
+                                    var _time=new Date(reserved_array[y].getDate()+'T'+reserved_array[y].getTime());
+                                    
+                                    if(_time.getTime()===pre_time.getTime() || _time.getTime()===post_time.getTime() || _time.getTime()===dt.getTime()){
+                                        for(var a=0;a<seat.length;a++){
+                                            if(seat[a].getAttribute('data-value')==reserved_array[y].getTable()){
+                                                seat[a].classList.toggle('unavailable');}
+                                            }
+                                        }
+                                        
+                                    
+                                }
+                                
+                            
                         }
-                        }</script><?php }?>
+                        
+                    for(var i=0;i<seat.length;i++){
+                    if(!seat[i].classList.contains('unavailable')){
+                            seat[i].classList.toggle('available');
+                    }
+                    
+                        
+                        }
+                        </script><?php }?>
                     
                     <?php if($pax>2 && $pax<=4){ ?>
                         <script>
+                            class Reserved{
+                              
+                                constructor(pax,tableNo,date,time){
+                                    this.pax=pax;
+                                    this.tableNo=tableNo;
+                                    this.date=date;
+                                    this.time=time;
+                                }
+                                getPax(){
+                                    return this.pax;
+                                }
+                                getTable(){
+                                    return this.tableNo;
+                                }
+                                getDate(){
+                                    return this.date;
+                                }
+                                getTime(){
+                                    return this.time;
+                                }
+                            }
                             var array=<?php echo json_encode($occupied)?>;
+                            var time_array=<?php echo json_encode($occupied_time)?>;
+                            var date_array=<?php echo json_encode($occupied_date)?>;
+                            var pax_array=<?php echo json_encode($occupied_pax)?>;
+                            var date=<?php echo json_encode($date)?>;
+                            var time=<?php echo json_encode($time)?>;
+                            let dt=new Date(date+'T'+time);
+                            const reserved_array=[];
+                            for(var i=0;i<array.length;i++){
+                                
+                                if(pax_array[i]>2)
+                                reserved_array.push(new Reserved(pax_array[i],array[i],date_array[i],time_array[i]));
+                            }
+                            
                        const seat=document.querySelectorAll('.seat');
                        for(var i=0;i<seat.length;i++){
-                            for(var y=0;y<array.length;y++){
-                                if(array[y] == seat[i].getAttribute('data-value')){
-                            seat[i].classList.toggle('unavailable');
+                            for(var y=0;y<reserved_array.length;y++){
+                                
+                                if(reserved_array[y].getDate()==date){
+                                    var pre_time=new Date(dt.getTime()-30*60*1000);
+                                    var post_time=new Date(dt.getTime()+30*60*1000);
+                                    var _time=new Date(reserved_array[y].getDate()+'T'+reserved_array[y].getTime());
+                                    if(_time==pre_time || _time==post_time){
+                                    seat[y].classList.toggle('unavailable');}
+                                }
+                                
                             
-                        }}
-                        if(!seat[i].classList.contains('unavailable')){
-                            seat[i].classList.toggle('available');
                         }
+                    if(!seat[i].classList.contains('unavailable')){
+                            seat[i].classList.toggle('available');
+                    }
+                    
+                        
                         }
                             
                                
@@ -240,7 +344,6 @@
  
     <script>
         var data=<?php echo json_encode($API->getReservation());?>;
-        console.log(data);
         const floorplan_container=document.querySelector('.floorplan-container');
         const seats=document.querySelectorAll('.seat.available');
         const available_twin=document.querySelectorAll('.twin-seat.available');

@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="CSS/form.css">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  
   <style>
       .custom-select {
     -webkit-appearance: none;
@@ -44,17 +45,17 @@ select::-ms-expand {
     <div class="modal-content">
         
         <h1>Reservation Form</h1>
-        <form>
+        <form action="test.php" method="post">
   <label>
-    <input type="text" placeholder="Name"/>
+      <input type="text" placeholder="Name" name="name" required/>
   </label>
             
   <label>
-    <input type="text" placeholder="Email Address"/>
+      <input type="text" placeholder="Email Address" name="email" required/>
   </label>
             
   <label>
-    <input type="text" placeholder="Phone Number"/>
+      <input type="text" placeholder="Phone Number" name="phone" required/>
   </label>
   
             
@@ -74,24 +75,68 @@ select::-ms-expand {
   -webkit-appearance: none;
   text-shadow: 1px 1px 0 #FFF;
   background-color: #EBECF0;
-  ">
-         <option value="0">0</option>
+  " name="pax">
+         
          <option value="1">1</option>
          <option value="2">2</option>
          <option value="3">3</option>
          <option value="4">4</option>
+         <option value="5">5</option>
+         <option value="6">6</option>
         </select>
       Pax
   
   </label>
             
+            <label>
+                <input type="date" name="date" required>
+            </label>
+            
    <label>
-       <input type="datetime-local"  />
+       <?php  
+       $startTime= strtotime('16:00');
+       $endTime= strtotime('23:00');
+       $returnFormat='H:i:s';
+       
+       $current=time();
+       $addTime= strtotime('+'.'30 mins',$current);
+       $diff=$addTime-$current;
+       $times=array();
+       
+       while($startTime<$endTime){
+           $times[]= date($returnFormat,$startTime);
+           $startTime+=$diff;
+       }
+       $times[]= date($returnFormat,$startTime);
+       
+                
+       ?>
+       <select class="custom-select" style=" border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+   margin-right: 8px;
+  box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+  text-shadow: 1px 1px 0 #FFF;
+  background-color: #EBECF0;
+  " name="time">
+           <option value="">Select Time</option>
+           <?php foreach ($times as $key=>$val){ ?>
+           <option value="<?php echo $val;?>"><?php echo $val;?></option>
+           <?php }?>
+       </select>
   </label>
             <center>
-                <button class="button" type="button" style="width:70%;"><i class="icon ion-md-lock"></i>Next</button>
+                <button class="button" type="submit" style="width:70%;"><i class="icon ion-md-lock"></i>Next</button>
   </center>
   
+            
   
   
 </form>
