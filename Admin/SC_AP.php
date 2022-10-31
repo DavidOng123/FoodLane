@@ -1,25 +1,51 @@
+<?php
+session_start();
+include("server.php");
+
+if(isset($_POST['add_product'])){
+   $p_name = $_POST['p_name'];
+   $p_type = $_POST['p_type'];
+   $p_desc = $_POST['p_desc'];
+   $p_price = $_POST['p_price'];
+   $p_quantity = $_POST['p_quantity'];
+   $p_image = $_FILES['p_image']['name'];
+   $p_image_tmp_name = $_FILES['p_image']['tmp_name'];
+   $p_image_folder = 'uploaded_img/'.$p_image;
+
+   $insert_query = mysqli_query($con, "INSERT INTO `item`(`ItemName`, `Price`, `Item_img` , `ItemDesc`, `Quantity`, `ItemType`) VALUES ('$p_name','$p_price','$p_image','$p_desc','$p_quantity','$p_type');") or die('query failed');
+
+
+   if($insert_query){
+      move_uploaded_file($p_image_tmp_name, $p_image_folder);
+      $message[] = 'product add succesfully';
+      $_SESSION['AdminStatus'] = 'Added Successfully';
+   }else{
+      $message[] = 'could not add the product';
+      $_SESSION['AdminStatus2'] = 'Added Unsuccessfully';
+   }
+};
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-       
+        <title>Dashboard - FoodLane - Admin </title>
+        
         <!-- Bootstrap CSS & Sweet Alert CDN-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/styles.css" rel="stylesheet" />            
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         
-        <!-- Datatable CDN -->
-        <link href='//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         
-        <!--Admin Bootstrap-->
-        <script src="js/scripts.js"></script>
+       
+        
         
     </head>
     
@@ -115,31 +141,94 @@
                 
                 
                  <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Customer Tables</h1>
-                        <br>
-                        <br>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Customer List 
-                            </div>
+                 
+                    <?php 
+
+                        if(isset($_SESSION['AdminStatus'])){
+
+                            ?>
+                            <script>
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Product Added Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                            })
+                            </script>
+
+                    <?php
+                         unset($_SESSION['AdminStatus']);  
+                     }
+
+                     ?>
+        
+                  <br>
+                  <br>
+                
+                  
+                 <form action="" method="post" class="add-product-form" enctype="multipart/form-data">
+                    <div class="container mt-5 mb-5 d-flex justify-content-center">
+                        <div class="card px-1 py-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Customer ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <th>Address</th>                                          
-                                        </tr>
-                                    </thead>                                   
-                                </table>
+                                <h3 class="card-title mb-3" style="text-align: center;">Add New Item</h3>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="p_name" id="p_name" placeholder="Enter the Item Name" class="form-control" required> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="p_type" id="p_type" placeholder="Enter the Item Type" class="form-control" required> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="p_desc"  id="p_desc"placeholder="Enter the Item description" class="form-control" required> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <input type="number" name="p_price" id="p_price"min="0" placeholder="Enter the Item Price"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <input type="number" name="p_quantity" id="p_price"min="0" placeholder="Enter the Item Quantity"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                 
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group">                               
+                                                <input type="file" name="p_image" id="p_image" accept="image/png, image/jpg, image/jpeg" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <input type="submit" value="Add  product" name="add_product"  class="btn btn-primary btn-block confirm-button">
                             </div>
                         </div>
                     </div>
+                </form>    
+                     
+                    
                 </main>
+                
                 
                 
                 
@@ -160,33 +249,16 @@
         
         
         
-       
-       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        
+        
         
         <script>
-        $(document).ready(function(){
-            var empDataTable = $('#datatablesSimple').DataTable({
-                'processing': true,
-                'serverSide': true,
-                'serverMethod': 'post',
-                'ajax': {
-                    'url':'ajaxfile.php'
-                },
-                pageLength: 5,
-                'columns': [
-                    { data: 'CustID' },
-                    { data: 'CustName' },
-                    { data: 'Email' },
-                    { data: 'PhoneNum' },
-                    { data: 'Address' },
-                ]
-            });
-        });    
+               
             
             
-            
-            
-        function sweetalert(){
+            function sweetalert(){
             Swal.fire({
             title: 'Are you sure to logout?',
             icon: 'warning',
@@ -203,10 +275,5 @@
           })       
         }
         </script>
-        
-        
-        
-        
-        
     </body>
 </html>

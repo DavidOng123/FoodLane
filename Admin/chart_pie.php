@@ -1,15 +1,17 @@
 <?php  
  $connect = mysqli_connect("localhost", "root", "", "foodlane");  
- $query = "SELECT itemType, count(*) as number FROM item GROUP BY itemType";  
+ $query = "SELECT ItemType, count(*) as number FROM item GROUP BY ItemType";  
  $result = mysqli_query($connect, $query);  
  ?>  
+
+
  <!DOCTYPE html>  
  <html>  
       <head>           
-          <meta charset="utf-8" />
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
       </head>  
       <body>  
            <br><br>  
@@ -26,11 +28,11 @@
            function drawChart()  
            {  
             var data = google.visualization.arrayToDataTable([  
-                      ['itemType', 'Number'],  
+                      ['ItemType', 'Number'],  
                       <?php  
                       while($row = mysqli_fetch_array($result))  
                       {  
-                           echo "['".$row["itemType"]."', ".$row["number"]."],";  
+                           echo "['".$row["ItemType"]."', ".$row["number"]."],";  
                       }  
                       ?>  
                 ]);  
