@@ -2,7 +2,7 @@
 session_start();
 //header('location: login.php');
 
-$con = mysqli_connect("localhost","root","","foodlane", 3307);
+$con = mysqli_connect("localhost","root","","foodlane");
 //mysqli_select_db($con, 'foodlane');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){

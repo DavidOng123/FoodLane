@@ -45,7 +45,7 @@
     </head>
     
     
-   <body class="sb-nav-fixed">
+   <body class="sb-nav-fixed" style= "background: linear-gradient(to right,#A6BCE8 , #FFC0C0);">
         
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -66,7 +66,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="setting.php">Settings</a></li>
                        
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" onclick="sweetalert()" >Logout</a></li>
@@ -94,8 +94,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Manage Product</a>
-                                    <a class="nav-link" href="#">Add Product</a>
+                                    <a class="nav-link" href="SC_MP.php">Manage Product</a>
+                                    <a class="nav-link" href="SC_AP.php">Add Product</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

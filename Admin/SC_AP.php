@@ -1,33 +1,31 @@
-<?php 
+<?php
 session_start();
 include("server.php");
 
+if(isset($_POST['add_product'])){
+   $p_name = $_POST['p_name'];
+   $p_type = $_POST['p_type'];
+   $p_desc = $_POST['p_desc'];
+   $p_price = $_POST['p_price'];
+   $p_quantity = $_POST['p_quantity'];
+   $p_image = $_FILES['p_image']['name'];
+   $p_image_tmp_name = $_FILES['p_image']['tmp_name'];
+   $p_image_folder = 'uploaded_img/'.$p_image;
 
-if (isset($_POST['update'])){
-    
-    //$id = $_POST['id'];
-    $username = $_POST['UpdateUserName'];
-    $password = $_POST['UpdatePass'];
-   
-    
-    
-    
-    //Update data from database 
-    $query = "UPDATE `customer` SET CustName= '$_POST[UpdateUserName]', password = '$_POST[UpdatePass]' WHERE CustName ='$_POST[UpdateUserName]'";
-    $query_run = mysqli_query($con,$query);
-    
-    
-    
-    if ($query_run)
-    {
-        $_SESSION['username'] =  $username;
-        $_SESSION['Updatestatus'] = 'Update Successfully';
-        
-    }
-    
-}
+   $insert_query = mysqli_query($con, "INSERT INTO `item`(`ItemName`, `Price`, `Item_img` , `ItemDesc`, `Quantity`, `ItemType`) VALUES ('$p_name','$p_price','$p_image','$p_desc','$p_quantity','$p_type');") or die('query failed');
+
+
+   if($insert_query){
+      move_uploaded_file($p_image_tmp_name, $p_image_folder);
+      $message[] = 'product add succesfully';
+      $_SESSION['AdminStatus'] = 'Added Successfully';
+   }else{
+      $message[] = 'could not add the product';
+      $_SESSION['AdminStatus2'] = 'Added Unsuccessfully';
+   }
+};
+
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,122 +44,13 @@ if (isset($_POST['update'])){
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         
         
-        <title>Setting Admin Profile</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/scripts.js"></script>
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
-
-   <style>
-
-        .row {
-        --bs-gutter-x: 1.rem;
-        }
-
-        body{
-            background-color: #dee9ff;
-        }
-
-        .registration-form{
-                padding: 10px 0;
-        }
-
-        .registration-form form{
-            background-color: #fff;
-            max-width: 600px;
-            margin: auto;
-            padding: 20px 70px;
-            border-top-left-radius: 30px;
-            border-top-right-radius: 30px;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
-        }
-
-        .registration-form .form-icon{
-                text-align: center;
-            background-color: #5891ff;
-            border-radius: 50%;
-            font-size: 40px;
-            color: white;
-            width: 100px;
-            height: 100px;
-            margin: auto;
-            margin-bottom: 50px;
-            line-height: 100px;
-        }
-
-        .registration-form .item{
-                border-radius: 20px;
-            margin-bottom: 25px;
-            padding: 10px 20px;
-        }
-
-        .registration-form .create-account{
-            border-radius: 30px;
-            padding: 10px 20px;
-            font-size: 18px;
-            font-weight: bold;
-            background-color: #5791ff;
-            border: none;
-            color: white;
-            margin-top: 20px;
-        }
-
-        .registration-form .social-media{
-            max-width: 600px;
-            background-color: #fff;
-            margin: auto;
-            padding: 35px 0;
-            text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            color: #9fadca;
-            border-top: 1px solid #dee9ff;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
-        }
-
-        .registration-form .social-icons{
-            margin-top: 30px;
-            margin-bottom: 16px;
-        }
-
-        .registration-form .social-icons a{
-            font-size: 23px;
-            margin: 0 3px;
-            color: #5691ff;
-            border: 1px solid;
-            border-radius: 50%;
-            width: 45px;
-            display: inline-block;
-            height: 45px;
-            text-align: center;
-            background-color: #fff;
-            line-height: 45px;
-        }
-
-        .registration-form .social-icons a:hover{
-            text-decoration: none;
-            opacity: 0.6;
-        }
-
-        @media (max-width: 576px) {
-            .registration-form form{
-                padding: 50px 20px;
-            }
-
-            .registration-form .form-icon{
-                width: 70px;
-                height: 70px;
-                font-size: 30px;
-                line-height: 70px;
-            }
-        }
-
-        </style>     
+       
+        
         
     </head>
     
     
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" style= "background: linear-gradient(to right,#A6BCE8 , #FFC0C0);">
         
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -251,60 +140,93 @@ if (isset($_POST['update'])){
             <div id="layoutSidenav_content">
                 
                 
-                 <main style= "background: linear-gradient(to right,#9984AF , #FFEFF9);">
-                      
+                 <main>
+                 
                     <?php 
-                    if(isset($_SESSION['Updatestatus'])){        
-                    ?>
 
-                    <script>
-                    Swal.fire(
-                        'Update Successfully ! ',
-                        'Password have been updated !',
-                        'success'
-                      )
-                    </script>
+                        if(isset($_SESSION['AdminStatus'])){
 
-                   <?php
-                        unset($_SESSION['Updatestatus']);  
-                    }
-                    ?>
+                            ?>
+                            <script>
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Product Added Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                            })
+                            </script>
 
+                    <?php
+                         unset($_SESSION['AdminStatus']);  
+                     }
 
+                     ?>
+        
+                  <br>
+                  <br>
+                
+                  
+                 <form action="" method="post" class="add-product-form" enctype="multipart/form-data">
+                    <div class="container mt-5 mb-5 d-flex justify-content-center">
+                        <div class="card px-1 py-4">
+                            <div class="card-body">
+                                <h3 class="card-title mb-3" style="text-align: center;">Add New Item</h3>
 
-                    <div align="center"  style= "background: linear-gradient(to right,#A6BCE8 , #FFC0C0);" >
-                        <br>
-                        <h3>Setting Admin Profile</h3>
-                        <hr>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="p_name" id="p_name" placeholder="Enter the Item Name" class="form-control" required> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="p_type" id="p_type" placeholder="Enter the Item Type" class="form-control" required> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" name="p_desc"  id="p_desc"placeholder="Enter the Item description" class="form-control" required> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <input type="number" name="p_price" id="p_price"min="0" placeholder="Enter the Item Price"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group"> 
+                                                <input type="number" name="p_quantity" id="p_price"min="0" placeholder="Enter the Item Quantity"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                                 
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="input-group">                               
+                                                <input type="file" name="p_image" id="p_image" accept="image/png, image/jpg, image/jpeg" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <input type="submit" value="Add  product" name="add_product"  class="btn btn-primary btn-block confirm-button">
+                            </div>
+                        </div>
                     </div>
-                    <br>
-
-
-
-                     <div class="registration-form">
-                        <form method="post" >
-                            <div class="form-icon">
-                                <span><i class="icon icon-user"></i></span>
-                            </div>           
-                            <div class="form-group">
-                                <input type="text" class="form-control item" name="UpdateUserName"   required placeholder=<?php echo $_SESSION['username']; ?> >
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control item" name="UpdatePass"  placeholder="Enter new password" required >
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-block create-account" name="update" value="Update">
-                            </div>
-                             <br>
-                            <br>
-                        </form>
-                           
-                            <br>
-                          
-                    </div>
+                </form>    
                      
-                   
+                    
                 </main>
                 
                 
@@ -326,8 +248,14 @@ if (isset($_POST['update'])){
         </div>
         
         
-         <script>
-            
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        
+        
+        
+        <script>
+               
             
             
             function sweetalert(){
@@ -347,6 +275,5 @@ if (isset($_POST['update'])){
           })       
         }
         </script>
-       
     </body>
 </html>
