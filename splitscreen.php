@@ -473,7 +473,7 @@
                   <div class="image food"></div>
                   <div class="caption">
                         <h1>FOOD & DRINKS & MERCHANDISE</h1>
-                        <a class="button" href="#">OUR MENU</a>
+                        <a class="button" href="shop.php">OUR MENU</a>
                   </div>
             </div>
       </div>         

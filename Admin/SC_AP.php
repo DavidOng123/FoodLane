@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("server.php");
+include("server_zy.php");
 
 if(isset($_POST['add_product'])){
    $p_name = $_POST['p_name'];

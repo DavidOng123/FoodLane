@@ -139,133 +139,26 @@ section{
     <br>
 
     <div class="box-container">
+        <?php 
+        include 'db.php';
+        $qry = $con->query("SELECT * FROM item WHERE ItemType='Drink'");
+        while($row = $qry->fetch_assoc()):
+        ?>
 
         <div class="box">
-            <span class="discount">-10%</span>
             <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#
-                       " class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-20%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-17%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-3%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-18%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
+                <img src="images/<?php $row['image_path']?>" class="card-img-top" alt="...">
                 <div class="icons">
                     <a href="cart.php" class="cart-btn">add to cart</a>
                 </div>
             </div>
             <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
+                <h3 class="content-title"><?php echo $row['ItemName']?></h3>
+                <p class="content-description"><?php echo $row['ItemDesc']?></p>
+                <div class="price"><?php echo $row ['Price']?></div>
             </div>
         </div>
+        <?php endwhile; ?>
 
     </div>
 
@@ -274,5 +167,5 @@ section{
 <?php require_once 'footer.php' ?>
 </html>
 
-<!-- prodcuts section ends -->
+<!-- products section ends -->
 

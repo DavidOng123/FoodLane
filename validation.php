@@ -7,11 +7,11 @@ $con = mysqli_connect("localhost","root","","foodlane", 3307);
 //mysqli_select_db($con, 'foodlane');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    $email = $_POST['email'];
+    $Email = $_POST['Email'];
     $password = $_POST['password'];
  
 
-$s = " select * from customer where email = '$email' && password = '$password'";
+$s = " select * from customer where Email = '$Email' && password = '$password'";
 
 $result = mysqli_query($con, $s);
 

@@ -84,6 +84,9 @@
 <body>
 
 <?php require_once 'header.php' ?>
+    
+    <br>
+    <br>
 
 <div class ="small-container cart-page">
     <table>
@@ -95,10 +98,10 @@
         <tr>
             <td>
                 <div class="cart-info">
-                    <img src="images/burger.png">
+                    <img src="images/<?php echo $row['image_path']?>" alt="...">
                     <div>
-                        <p>Food</p>
-                        <small>Price: $50.00</small>
+                        <p class="content-name"><?php echo $row['ItemName']?></p>
+                        <small class="content-price">Price: <?php echo $row['Price']?></small>
                         <br>
                         <a href="">Remove</a>
                     </div>
@@ -106,7 +109,7 @@
                 </div>
             </td>
             <td><input type="number" value="1"></td>
-            <td>$50.00</td>
+            <td><?php echo $row['Price']?></td>
         </tr>
         
         <tr>
@@ -179,6 +182,7 @@
                 <td><div id="paypal-payment-button"></td>
             </tr>
         </table>
+</div>
 </div>
 
 <script src="https://www.paypal.com/sdk/js?client-id=Aen8MDfk0jNq2bAsAUwzkMNCi0tgF-KMLuI0elE6EDqFQ9jYh7EmcyywPn0sHDBQ8s3IBsBAcpumJ-9I"></script>

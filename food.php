@@ -1,3 +1,17 @@
+<?php 
+include 'db.php';
+if (isset($_POST['add_to_cart']))
+    
+    $ItemName = $_POST['ItemName'];
+    $image_path = $_POST['image_path'];
+    $Price = $_POST['Price'];
+    $Quantity = 1;
+    
+    $select_cart = mysqli_query($con, "SELECT * FROM cart WHERE ItemName= '$ItemName'");
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,17 +128,32 @@ section{
 
 .products .box-container .box .content .price{
     font-size: 2.5rem;
-    color:var(--pink);
+    color:lightsteelblue;
     font-weight: bolder;
     padding-top: 1rem;
 }
 
 .products .box-container .box .content .price span{
     font-size: 1.5rem;
-    color:#999;
+    color:lightsteelblue;
     font-weight: lighter;
     text-decoration: line-through;
 }
+
+button{
+    border: 2px solid lightsteelblue;
+    background: steelblue;
+    color: white;
+    font-weight: bold;
+    margin: 20px;
+    padding: 5px 10px;
+}
+
+button:hover{
+    box-shadow: 0 0 5px 5px lightsteelblue inset;
+}
+    
+
 </style>
 </head>
 
@@ -139,139 +168,51 @@ section{
     <br>
 
     <div class="box-container">
+        <?php 
+        include 'db.php';
+        $qry = $con->query("SELECT * FROM item WHERE ItemType='Food'");
+        while($row = $qry->fetch_assoc()):
+        ?>
 
         <div class="box">
-            <span class="discount">-10%</span>
             <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
+                <img src="images/<?php echo $row['image_path']?>" class="card-img-top" alt="...">
             </div>
             <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
+                <h3 class="content-title"><?php echo $row['ItemName']?></h3>
+                <p class="content-description"><?php echo $row['ItemDesc']?></p>
+                <div class="price"><?php echo $row ['Price']?>  
+                <h5 class="text-info">Quantity: <input type="number" min="1" max="25" name="quantity" class="form-control" value="1" style="width: 60px;"> </h5>
+                    <//input type="number" id="quantity" name="quantity" min="1" max="10"></div>
+                <br>
+                <input type='submit' name='add_to_cart' class='btn' value='add to cart'>
+                
+                <script>
+                    /*var addItemId = 0;
+                    function addToCart(item) {
+                        addItemId += 1;
+                        var selectedItem = document.createElement('div');
+                        selectedItem.classList.add('cartImg');
+                        selectedItem.setAttribute('id',addItemId);
+                        var img = document.createElement('img');
+                        img.setAttribute('src', item.children[0].currentSrc);
+                        var cartItems = document.getElementById('small-container cart-page');
+                        selectedItem.append(img);
+                        cartItems.append(selectedItem);
+                    }*/                
+                </script>
+                
             </div>
         </div>
-
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-20%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-17%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-3%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-18%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
+        <?php endwhile; ?>
 
     </div>
+
 
 </section>
 </body>
 <?php require_once 'footer.php' ?>
 </html>
 
-<!-- prodcuts section ends -->
+<!-- products section ends -->
 
