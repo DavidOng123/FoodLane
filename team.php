@@ -161,12 +161,13 @@
       <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
         <div class="team-card">
           <div class="img-wrapper">
-            <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/expert1.png"
-              class="team-img" />
+            <img src="images/team_ZY.jpeg"
+              class="team-img" style="border-radius: 50%; width:230px" />
           </div>
-          <p class="text-blk name">Maxwell Doe
+            <br>
+          <p class="text-blk name">Tan Zi Yee
           </p>
-          <p class="text-blk position">Instructor
+          <p class="text-blk position">Development Team
           </p>
           
         </div>

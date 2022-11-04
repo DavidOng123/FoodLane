@@ -1,16 +1,23 @@
 <?php 
 include 'db.php';
-if (isset($_POST['add_to_cart']))
-    
-    $ItemName = $_POST['ItemName'];
-    $image_path = $_POST['image_path'];
-    $Price = $_POST['Price'];
-    $Quantity = 1;
-    
-    $select_cart = mysqli_query($con, "SELECT * FROM cart WHERE ItemName= '$ItemName'");
-    
-?>
 
+if(isset($_POST['add_to_cart'])) {
+    $ItemName= $_POST['ItemName'];
+    $Quantity= $_POST['Quantity'];
+    $Price= $_POST['Price'];
+    $image_path= $_POST['image_path'];
+    
+    $select_cart = mysqli_query($con, "SELECT * FROM `cart` WHERE ItemName = '$ItemName'");
+    
+    if(mysqli_num_rows($select_cart) > 0) {
+        $message[] = 'product already added to cart';
+    } else {
+        $insert_query=mysqli_query($con, "INSERT INTO `cart`(ItemName, Quantity, Price, image_path)
+        VALUES('$ItemName', '$Quantity', '$Price', '$image_path')");
+        $message[] = 'product added to cart successfully';
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -128,32 +135,17 @@ section{
 
 .products .box-container .box .content .price{
     font-size: 2.5rem;
-    color:lightsteelblue;
+    color:var(--pink);
     font-weight: bolder;
     padding-top: 1rem;
 }
 
 .products .box-container .box .content .price span{
     font-size: 1.5rem;
-    color:lightsteelblue;
+    color:#999;
     font-weight: lighter;
     text-decoration: line-through;
 }
-
-button{
-    border: 2px solid lightsteelblue;
-    background: steelblue;
-    color: white;
-    font-weight: bold;
-    margin: 20px;
-    padding: 5px 10px;
-}
-
-button:hover{
-    box-shadow: 0 0 5px 5px lightsteelblue inset;
-}
-    
-
 </style>
 </head>
 
@@ -174,40 +166,29 @@ button:hover{
         while($row = $qry->fetch_assoc()):
         ?>
 
+    
+        <form action="" method="post">
         <div class="box">
             <div class="image">
                 <img src="images/<?php echo $row['image_path']?>" class="card-img-top" alt="...">
+                <div class="icons">
+                    <input type='submit' class="cart-btn" value='add to cart' name='add_to_cart'>
+                </div>
             </div>
             <div class="content">
                 <h3 class="content-title"><?php echo $row['ItemName']?></h3>
                 <p class="content-description"><?php echo $row['ItemDesc']?></p>
-                <div class="price"><?php echo $row ['Price']?>  
-                <h5 class="text-info">Quantity: <input type="number" min="1" max="25" name="quantity" class="form-control" value="1" style="width: 60px;"> </h5>
-                    <//input type="number" id="quantity" name="quantity" min="1" max="10"></div>
-                <br>
-                <input type='submit' name='add_to_cart' class='btn' value='add to cart'>
-                
-                <script>
-                    /*var addItemId = 0;
-                    function addToCart(item) {
-                        addItemId += 1;
-                        var selectedItem = document.createElement('div');
-                        selectedItem.classList.add('cartImg');
-                        selectedItem.setAttribute('id',addItemId);
-                        var img = document.createElement('img');
-                        img.setAttribute('src', item.children[0].currentSrc);
-                        var cartItems = document.getElementById('small-container cart-page');
-                        selectedItem.append(img);
-                        cartItems.append(selectedItem);
-                    }*/                
-                </script>
-                
+                <div class="price">RM <?php echo $row ['Price']?>  <input type="number" name="Quantity" name="quantity" min="1" max="5"></div> 
+                <input type="hidden" name="ItemName" value="<?php echo $row['ItemName']?>">
+                <input type="hidden" name="Price" value="<?php echo $row['Price']?>">
+                <input type="hidden" name="image_path" value="<?php echo $row['image_path']?>">
             </div>
         </div>
+    </form>
+        
         <?php endwhile; ?>
 
     </div>
-
 
 </section>
 </body>

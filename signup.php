@@ -2,18 +2,18 @@
 session_start();
 //header('location: login.php');
 
-$con = mysqli_connect("localhost","root","","foodlane");
+$con = mysqli_connect("localhost","root","","foodlane", 3307);
 //mysqli_select_db($con, 'foodlane');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
-    $username = $_POST['username'];
+    $CustName = $_POST['CustName'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     $password = $_POST['password'];
  
 
-$s = " select * from customer where username = '$username'";
+$s = " select * from customer where CustName = '$CustName'";
 
 $result = mysqli_query($con, $s);
 
@@ -24,7 +24,7 @@ if($num == 1){
  
     
 }else{
-    $reg = " insert into customer(username, email, phone, address, password) values ('$username', '$email', '$phone', '$address', '$password')";
+    $reg = " insert into customer(CustName, email, phone, address, password) values ('$CustName', '$email', '$phone', '$address', '$password')";
     mysqli_query($con, $reg);
     $_SESSION['status']="Successfully";
 }
@@ -100,7 +100,7 @@ if(isset($_SESSION['status'])){
 				<h2>Sign Up</h2>
 				<div class="form-row">
 					<label for="full-name">Username</label>
-					<input type="text" name="username" id="username" class="input-text" placeholder="Your Name" required pattern="[A-Za-z0-9]+">
+					<input type="text" name="CustName" id="username" class="input-text" placeholder="Your Name" required pattern="[A-Za-z0-9]+">
 					<i class="fas fa-user"></i>
 				</div>
 				<div class="form-row">

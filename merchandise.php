@@ -1,3 +1,24 @@
+<?php 
+include 'db.php';
+
+if(isset($_POST['add_to_cart'])) {
+    $ItemName= $_POST['ItemName'];
+    $Quantity= $_POST['Quantity'];
+    $Price= $_POST['Price'];
+    $image_path= $_POST['image_path'];
+    
+    $select_cart = mysqli_query($con, "SELECT * FROM `cart` WHERE ItemName = '$ItemName'");
+    
+    if(mysqli_num_rows($select_cart) > 0) {
+        $message[] = 'product already added to cart';
+    } else {
+        $insert_query=mysqli_query($con, "INSERT INTO `cart`(ItemName, Quantity, Price, image_path)
+        VALUES('$ItemName', '$Quantity', '$Price', '$image_path')");
+        $message[] = 'product added to cart successfully';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,6 +151,15 @@ section{
 
 
 <body>
+    
+<?php 
+/*if(isset($message)){
+    foreach($message as $message){
+        echo '<div class="message"><span>'.$message.'</span> <i class="fas fa times" onclick="this.parentElement.style.display = `none`;"></i> </div>';
+    };
+};*/
+
+?>
 
 <?php require_once 'header.php' ?>
 
@@ -141,23 +171,30 @@ section{
     <div class="box-container">
         <?php 
         include 'db.php';
-        $qry = $con->query("SELECT * FROM item");
+        $qry = $con->query("SELECT * FROM item WHERE ItemType='Merchandise'");
         while($row = $qry->fetch_assoc()):
         ?>
 
+    
+        <form action="" method="post">
         <div class="box">
             <div class="image">
-                <img src="images/<?php $row['image_path']?>" class="card-img-top" alt="...">
+                <img src="images/<?php echo $row['image_path']?>" class="card-img-top" alt="...">
                 <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
+                    <input type='submit' class="cart-btn" value='add to cart' name='add_to_cart'>
                 </div>
             </div>
             <div class="content">
                 <h3 class="content-title"><?php echo $row['ItemName']?></h3>
                 <p class="content-description"><?php echo $row['ItemDesc']?></p>
-                <div class="price"><?php echo $row ['Price']?></div>
+                <div class="price">RM <?php echo $row ['Price']?>  <input type="number" name="Quantity" name="quantity" min="1" max="5"></div> 
+                <input type="hidden" name="ItemName" value="<?php echo $row['ItemName']?>">
+                <input type="hidden" name="Price" value="<?php echo $row['Price']?>">
+                <input type="hidden" name="image_path" value="<?php echo $row['image_path']?>">
             </div>
         </div>
+    </form>
+        
         <?php endwhile; ?>
 
     </div>

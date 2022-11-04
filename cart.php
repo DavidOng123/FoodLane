@@ -1,27 +1,99 @@
+<?php 
+include 'db.php';
+
+if(isset($_POST['update_update_btn'])){
+    $update_value = $_POST['update_quantity'];
+    $update_id = $_POST['update_quantity_id'];
+    $update_quantity_query = mysqli_query($con, "UPDATE `cart` SET Quantity = '$update_value' WHERE CartID = '$update_id'");
+    if($update_quantity_query){
+        header('location:cart.php');
+    }
+}
+
+if(isset($_GET['remove'])){
+   $remove_id = $_GET['remove'];
+   mysqli_query($con, "DELETE FROM `cart` WHERE CartID = '$remove_id'");
+   header('location:cart.php');
+};
+
+if(isset($_GET['delete_all'])){
+   mysqli_query($con, "DELETE FROM `cart`");
+   header('location:cart.php');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    
 
 
 <style>
-    .cart-page{
-        margin: 15px auto;
-        background: lightgray;
+   /* .shopping-cart table{
+        text-align: center;
+        width: 25%;
     }
-    table{
+    
+    .shopping-cart table thead th{
+        padding: 1.5rem;
+        font-size: 2rem;
+        color: var(--white);
+        background-color: var(--lightsteelblue);
+    }
+    
+    .shopping-cart table tr td{
+        border-bottom: var(--border);
+        padding: 1.5rem;
+        font-size: 2rem;
+        color: var(--black);   
+    }*/
+    
+    .shopping-cart table input[type="number"]{
+        border: var(--border);
+        padding: 1rem 4rem;
+        font-size: 2rem;
+        color: var(--white);
+        width: 10rem;
+    }
+    
+    .shopping-cart table input[type="submit"]{
+        padding: 0rem 5rem;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1rem;
+        background-color: var(--orange);
+        color: var(--white);
+    }
+    
+    shopping-cart table input[type="submit"]:hover{
+        background-color: var(--black);
+    }
+    
+    shopping-cart table .table-bottom{
+        background-color: var(--lightsteelblue);
+    }
+    
+    
+    shopping-cart table{
         width: 100%;
         border-collapse: collapse;
     }
     
-    .cart-info{
+    .shopping-cart{
         display: flex;
         flex-wrap: wrap;
     }
     
-    th{
+    .shopping-cart th{
         text-align: left;
         padding: 5px;
         color: #fff;
@@ -29,47 +101,38 @@
         font-weight: normal; 
     }
     
-    td{
+    .shopping-cart td{
         padding: 10px 5px;
     }
     
-    td input{
+    .shopping-cart td input{
         width: 40px;
         height: 30px;
         padding: 5px;
     }
+   
     
-    td a{
+    .shopping-cart td a{
         color: lightsteelblue;
         font-size: 12px;
     }
     
-    td img{
+    .shopping-cart td img{
         width: 80px;
         height: 80px;
         margin-right: 10px;
     }
-    
-    .total-price{
-        display: flex;
-        justify-content: flex-end;
-    }
-    
-    .total-price table{
-        border-top: 3px solid lightsteelblue;
-        width: 100%;
-        max-width: 400px;
-    }
-    
-    .total-price button{
-        width: 100%;
-    }
+ 
     td:last-child{
         text-align: right;
     }
     
      th:last-child{
         text-align: right;
+    }
+    
+    .checkout-btn{
+        color: lightsteelblue;
     }
     
     @media only screen and (max-width: 600px){
@@ -85,106 +148,84 @@
 
 <?php require_once 'header.php' ?>
     
-    <br>
-    <br>
-
-<div class ="small-container cart-page">
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-        </tr>
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/<?php echo $row['image_path']?>" alt="...">
-                    <div>
-                        <p class="content-name"><?php echo $row['ItemName']?></p>
-                        <small class="content-price">Price: <?php echo $row['Price']?></small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
+    <div class="container">
+        <section class="shopping-cart">
+            <br>
+            <h3 class="heading">Shopping Cart</h3>
+            
+            <table>
+                <thead>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </thead>
+                
+                <tbody>
                     
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td><?php echo $row['Price']?></td>
-        </tr>
+                    <?php 
+                    
+                    $select_cart = mysqli_query($con, "SELECT * FROM `cart`");
+                    $grand_total = 0;
+                    if(mysqli_num_rows($select_cart) > 0){
+                        while ($fetch_cart = mysqli_fetch_assoc($select_cart)){
+                            
+                    ?>
+                    
+                    <tr>
+                        <td><img src="images/<?php echo $fetch_cart['image_path'];?>" height="100" alt=""></td>
+                        <td><?php echo $fetch_cart['ItemName'];?></td>
+                        <td>RM <?php echo number_format($fetch_cart['Price']);?></td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="hidden" name="update_quantity_id" value="<?php echo $fetch_cart['CartID'];?>">
+                                <input type="number" name="update_quantity" min="1" value="<?php echo $fetch_cart['Quantity'];?>">
+                                <input type="submit" value="update" name="update_update_btn">
+                            </form>
+                        </td>
+                        <td>RM <?php  echo $sub_total = number_format($fetch_cart['Price']) * $fetch_cart['Quantity']?></td>
+                        <td><a href="cart.php?remove=<?php echo $fetch_cart['CartID'];?>" onclick="return confirm('Remove item from cart?')" class="delete-btn"> <i class="fas fa-trash"></i>Remove</a></td>
+                    </tr>
+                    
+                <br>
+                    
+                    <?php
+                    $grand_total += $sub_total;                    
+                        };
+                    };
+                    ?>
+                    <tr class="table-bottom">
+                        <td><a href="shop.php" class="option-btn" style="margin-top: 0;">Continue Shopping</a></td>
+                        <td colspan="3">Grand Total</td>
+                        <td>RM <?php echo $grand_total; ?></td>
+                        <td><a href="cart.php?delete_all" onclick="return confirm('Are you sure you want to delete all?');" class="delete-btn"><i class="fas fa-trash">Delete all</i></a></td>
+                    </tr>
+                   
+                </tbody>
+                </table>
+            
+             <div class="checkout-btn">
+                <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">procced to checkout</a>
+                <br>
+                <br>
+                <tr>
+                    <td><div id="paypal-payment-button"></td>                    
+                </tr>
+                
+             </div>
+            
+           
+                
+            
+            
+        </section>
         
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/burger.png">
-                    <div>
-                        <p>Food</p>
-                        <small>Price: $50.00</small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                    
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
-        
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/burger.png">
-                    <div>
-                        <p>Food</p>
-                        <small>Price: $50.00</small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                    
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
-        
-        <tr>
-            <td>
-                <div class="cart-info">
-                    <img src="images/burger.png">
-                    <div>
-                        <p>Food</p>
-                        <small>Price: $50.00</small>
-                        <br>
-                        <a href="">Remove</a>
-                    </div>
-                    
-                </div>
-            </td>
-            <td><input type="number" value="1"></td>
-            <td>$50.00</td>
-        </tr>
-    </table>
+    </div>
     
-    <div class="total-price">
-        <table>
-            <tr>
-                <td>Subtotal</td>
-                <td>$150.00</td>
-            </tr>
-            <tr>
-                <td>Tax</td>
-                <td>$20.00</td>
-            </tr>
-            <tr>
-                <td>Total</td>
-                <td>$170.00</td>
-            </tr>
-            <tr>
-                <td><div id="paypal-payment-button"></td>
-            </tr>
-        </table>
-</div>
-</div>
-
+<script src="js/script.js"></script>    
+    
 <script src="https://www.paypal.com/sdk/js?client-id=Aen8MDfk0jNq2bAsAUwzkMNCi0tgF-KMLuI0elE6EDqFQ9jYh7EmcyywPn0sHDBQ8s3IBsBAcpumJ-9I"></script>
 <script>paypal.Buttons().render("#paypal-payment-button");</script>
 

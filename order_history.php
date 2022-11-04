@@ -40,11 +40,14 @@
     
     <tr>
         <th>Order No</th>
-        <th>Customer ID</th>
-        <th>Item ID</th>
-        <th>Order Date</th>
+        <th>Customer Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Total Products</th>
+        <th>Total Price</th>
+        <th>Payment Method</th>
         <th>Order Status</th>
-        <th>Payment ID</th>
+        <th>Payment Status</th>
     </tr>
   
   <?php
@@ -53,19 +56,25 @@
   $result_orders=mysqli_query($con, $get_order_details);
   while($row_orders=mysqli_fetch_assoc($result_orders)){
       $OrderID=$row_orders['OrderID'];
-      $CustID=$row_orders['CustID'];
-      $ItemID=$row_orders['ItemID'];
-      $Date_Time=$row_orders['Date_Time'];
+      $CustName=$row_orders['CustName'];
+      $PhoneNum=$row_orders['PhoneNum'];
+      $Email=$row_orders['Email'];
+      $total_products=$row_orders['total_products'];
+      $total_price=$row_orders['total_price'];
+      $method=$row_orders['method'];
       $OrderStatus=$row_orders['OrderStatus'];
-      $PaymentID=$row_orders['PaymentID'];
+      $PaymentStatus=$row_orders['PaymentStatus'];
       $number=1;
       echo "<tr>
     <td>$OrderID</td>
-    <td>$CustID</td>
-    <td>$ItemID</td>
-    <td>$Date_Time</td>
+    <td>$CustName</td>
+    <td>$PhoneNum</td>
+    <td>$Email</td>
+    <td>$total_products</td>
+    <td>$total_price</td>
+    <td>$method</td>
     <td>$OrderStatus</td>
-    <td>$PaymentID</td>
+    <td>$PaymentStatus</td>
   </tr>";
   $number++;
   }
