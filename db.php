@@ -1,9 +1,24 @@
 <?php
-    // Enter your host name, database username, password, and database name.
-    // If you have not set database password on localhost then set empty.
-    $con = mysqli_connect("localhost","root","","foodlane", 3307);
-    // Check connection
-    if (mysqli_connect_errno()){
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+   class DB{
+    public $con;
+    private $host="localhost";
+    private $dbname="foodlane";
+    private $user="root";
+    private $password="";
+    
+    public function __construct() {
+        $dsn="mysql:host=".$this->host.";dbname=".$this->dbname;
+        try{
+            $this->con=new PDO($dsn, $this->user, $this->password);
+            $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (Exception $ex) {
+            echo 'Connection failed';
+        }
     }
+    
+
+
+    
+}
+
 ?>

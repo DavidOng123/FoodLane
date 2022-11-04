@@ -119,6 +119,94 @@
         }
         
         
+.button {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: green;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 100px;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+.button-cancel {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: red;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 100px;
+}
+
+.button-cancel:hover,
+.button-cancel:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-cancel:hover {
+  transform: translateY(-1px);
+}
+
+.button-cancel:active {
+  background-color: orange;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
     </style>
 </head>
 
@@ -129,6 +217,8 @@
     <br>
     <br>
     <br>
+    
+    <a class="container">
     
 <center><p>Choose a table you preferred by clicking on the table available.<p></center>
                
@@ -311,36 +401,46 @@
                                 if(pax_array[i]>2)
                                 reserved_array.push(new Reserved(pax_array[i],array[i],date_array[i],time_array[i]));
                             }
+                            console.log(reserved_array);
                             
                        const seat=document.querySelectorAll('.seat');
-                       for(var i=0;i<seat.length;i++){
-                            for(var y=0;y<reserved_array.length;y++){
+                        for(var y=0;y<reserved_array.length;y++){
                                 
                                 if(reserved_array[y].getDate()==date){
+                                    
                                     var pre_time=new Date(dt.getTime()-30*60*1000);
                                     var post_time=new Date(dt.getTime()+30*60*1000);
                                     var _time=new Date(reserved_array[y].getDate()+'T'+reserved_array[y].getTime());
-                                    if(_time==pre_time || _time==post_time){
-                                    seat[y].classList.toggle('unavailable');}
+                                    
+                                    if(_time.getTime()===pre_time.getTime() || _time.getTime()===post_time.getTime() || _time.getTime()===dt.getTime()){
+                                        for(var a=0;a<seat.length;a++){
+                                            if(seat[a].getAttribute('data-value')==reserved_array[y].getTable()){
+                                                seat[a].classList.toggle('unavailable');}
+                                            }
+                                        }
+                                        
+                                    
                                 }
                                 
                             
                         }
+                        
+                    for(var i=0;i<seat.length;i++){
                     if(!seat[i].classList.contains('unavailable')){
                             seat[i].classList.toggle('available');
                     }
                     
                         
                         }
-                            
-                               
-                       
                     
                     
                     </script><?php }?>
                     
                     
-<center><p>You have selected the tables of<span id="tableNo"></span>.<p></center>
+                    <center><p>You have selected the tables of<span id="tableNo"></span>.<p></center>
+                    
+                    <center><button class="button">Submit</button></center>
+                    <center><button class="button-cancel">Cancel</button></center>
  
     <script>
         var data=<?php echo json_encode($API->getReservation());?>;
@@ -387,7 +487,6 @@
       
 
     </script>
-    
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+    </a>
+</body>
 </html>

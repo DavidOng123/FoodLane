@@ -24,7 +24,7 @@
         <div class="nav-items">
           <i class="uil uil-times nav-close-btn"></i>
           <a href="index.php"><i class="uil uil-home"></i> Home</a>
-          <a href="#"><i class="uil uil-info-circle"></i> Reservation</a>
+          <a href="reservation.php"><i class="uil uil-info-circle"></i> Reservation</a>
           <a href="shop.php"><i class="uil uil-document-layout-left"></i> Shop</a>
           <a href="team.php"><i class="uil uil-compass"></i> About</a>
           <a href="customerService.php"><i class="uil uil-envelope"></i> Contact Us</a>

@@ -176,7 +176,7 @@ input:-moz-placeholder { /* Firefox 18- */
 <?php require_once 'header.php'; ?>
 
 <?php
-require 'db.php';
+require 'Database.php';
 ?>
 
 
