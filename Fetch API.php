@@ -11,7 +11,7 @@ $stmt->execute();
 $data= array();
 
 while($row= $stmt->fetch(PDO::FETCH_ASSOC)){
-    $data[]=array("ReservationID"=>$row["ReservationID"],"CustID"=>$row["CustID"],"Pax"=>$row["Pax"],"TableNo"=>$row["TableNo"],"Date"=>$row["Date"],"Time"=>$row["Time"]);
+    $data[]=array("ReservationID"=>$row["reservationID"],"Pax"=>$row["pax"],"TableNo"=>$row["tableNo"],"Date"=>$row["date"],"Time"=>$row["time"]);
    
 }
 return json_encode($data);
