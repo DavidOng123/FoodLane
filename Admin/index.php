@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("server.php");
+include("server_zy.php");
 
 
 ?>
@@ -217,7 +217,7 @@ include("server.php");
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a>
                                          <?php
-                                            $query ="SELECT OrderID FROM order_table ORDER BY OrderID";
+                                            $query ="SELECT OrderID FROM orders ORDER BY OrderID";
                                             $query_run = mysqli_query($con,$query);
 
                                             $row = mysqli_num_rows($query_run);

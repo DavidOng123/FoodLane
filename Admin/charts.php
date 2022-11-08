@@ -1,5 +1,5 @@
 <?php  
- $connect = mysqli_connect("localhost", "root", "", "foodlane");  
+ $connect = mysqli_connect("localhost", "root", "", "foodlane",3307);  
  $query = "SELECT ItemType, count(*) as number FROM item GROUP BY ItemType";  
  $result = mysqli_query($connect, $query);  
  ?>  
@@ -169,7 +169,7 @@
                                             <br>
                                             <br>
 
-                                            <table class="table table-striped table-bordered" id="order_table">
+                                            <table class="table table-striped table-bordered" id="orders">
                                                 <thead>
                                                     <tr>
                                                         <th>Reservation ID</th>

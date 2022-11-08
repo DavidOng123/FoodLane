@@ -296,6 +296,8 @@ section{
 <body>
 
 <?php require_once 'header.php' ?>
+    <br>
+    <?php require_once 'promotion_banner.php' ?>
 
 <div class="slideshow-container">
 
@@ -353,7 +355,7 @@ function showSlides() {
 
             <a href="food.php">
             <div class="box-3 float-container">
-                <img src="images/1.jpg" alt="Food" class="img-responsive img-curve">
+                <img src="images/food.jpg" alt="Food" class="img-responsive img-curve">
 
                 <h3 class="float-text text-white">Food</h3>
             </div>
@@ -361,7 +363,7 @@ function showSlides() {
 
             <a href="drink.php">
             <div class="box-3 float-container">
-                <img src="images/3.jpg" alt="Drink" class="img-responsive img-curve">
+                <img src="images/drink4.jpg" alt="Drink" class="img-responsive img-curve">
 
                 <h3 class="float-text text-white">Drink</h3>
             </div>
@@ -369,7 +371,7 @@ function showSlides() {
 
             <a href="merchandise.php">
             <div class="box-3 float-container">
-                <img src="images/4.jpg" alt="Merchandise" class="img-responsive img-curve">
+                <img src="images/merchandise.jpg" alt="Merchandise" class="img-responsive img-curve">
 
                 <h3 class="float-text text-white">Merchandise</h3>
             </div>

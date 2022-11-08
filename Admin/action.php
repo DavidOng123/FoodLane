@@ -1,6 +1,6 @@
 <?php
 
-$connect = new PDO("mysql:host=localhost;dbname=foodlane", "root", "");
+$connect = new PDO("mysql:host=localhost;dbname=foodlane", "root", "", 3307);
 
 
 if(isset($_POST["action"]))

@@ -1,3 +1,24 @@
+<?php 
+include 'db.php';
+
+if(isset($_POST['add_to_cart'])) {
+    $ItemName= $_POST['ItemName'];
+    $Quantity= $_POST['Quantity'];
+    $Price= $_POST['Price'];
+    $image_path= $_POST['image_path'];
+    
+    $select_cart = mysqli_query($con, "SELECT * FROM `cart` WHERE ItemName = '$ItemName'");
+    
+    if(mysqli_num_rows($select_cart) > 0) {
+        $message[] = 'product already added to cart';
+    } else {
+        $insert_query=mysqli_query($con, "INSERT INTO `cart`(ItemName, Quantity, Price, image_path)
+        VALUES('$ItemName', '$Quantity', '$Price', '$image_path')");
+        $message[] = 'product added to cart successfully';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,132 +160,33 @@ section{
     <br>
 
     <div class="box-container">
+        <?php 
+        include 'db.php';
+        $qry = $con->query("SELECT * FROM item WHERE ItemType='Food'");
+        while($row = $qry->fetch_assoc()):
+        ?>
 
+    
+        <form action="" method="post">
         <div class="box">
-            <span class="discount">-10%</span>
             <div class="image">
-                <img src="images/1.jpg" alt="">
+                <img src="images/<?php echo $row['image_path']?>" class="card-img-top" alt="...">
                 <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
+                    <input type='submit' class="cart-btn" value='add to cart' name='add_to_cart'>
                 </div>
             </div>
             <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
+                <h3 class="content-title"><?php echo $row['ItemName']?></h3>
+                <p class="content-description"><?php echo $row['ItemDesc']?></p>
+                <div class="price">RM <?php echo $row ['Price']?>  <input type="number" name="Quantity" name="quantity" min="1" max="5"></div> 
+                <input type="hidden" name="ItemName" value="<?php echo $row['ItemName']?>">
+                <input type="hidden" name="Price" value="<?php echo $row['Price']?>">
+                <input type="hidden" name="image_path" value="<?php echo $row['image_path']?>">
             </div>
         </div>
-
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-20%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="cart.php" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-17%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-3%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-18%</span>
-            <div class="image">
-                <img src="images/3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="cart-btn">add to cart</a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
-        </div>
+    </form>
+        
+        <?php endwhile; ?>
 
     </div>
 
@@ -273,5 +195,5 @@ section{
 <?php require_once 'footer.php' ?>
 </html>
 
-<!-- prodcuts section ends -->
+<!-- products section ends -->
 
