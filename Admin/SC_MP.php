@@ -27,9 +27,9 @@ if(isset($_POST['update_product'])){
    
    $update_p_image = $_FILES['update_p_image']['name'];
    $update_p_image_tmp_name = $_FILES['update_p_image']['tmp_name'];
-   $update_p_image_folder = 'uploaded_img/'.$update_p_image;
+   $update_p_image_folder = 'images/'.$update_p_image;
 
-   $update_query = mysqli_query($con, "UPDATE `item` SET ItemName = '$update_p_name', Price = '$update_p_price',  ItemDesc = '$update_p_desc', Quantity = '$update_p_quantity', ItemType = '$update_p_type',Item_img = '$update_p_image' WHERE ItemID = '$update_p_id'");
+   $update_query = mysqli_query($con, "UPDATE `item` SET ItemName = '$update_p_name', Price = '$update_p_price',  ItemDesc = '$update_p_desc', Quantity = '$update_p_quantity', ItemType = '$update_p_type',image_path = '$update_p_image' WHERE ItemID = '$update_p_id'");
 
    
    if($update_query){
@@ -358,7 +358,7 @@ if(isset($_POST['update_product'])){
                                ?>
 
                                <tr>
-                                  <td><img src="uploaded_img/<?php echo $row['Item_img']; ?>" height="100" alt=""></td>
+                                  <td><img src="images/<?php echo $row['image_path']; ?>" height="100" alt=""></td>
                                   <td><?php echo $row['ItemName']; ?></td>
                                   <td><?php echo $row['ItemDesc']; ?></td>
                                   <td><?php echo $row['ItemType']; ?></td>
@@ -396,7 +396,7 @@ if(isset($_POST['update_product'])){
                              ?>
 
                              <form action="" method="post" enctype="multipart/form-data">
-<!--                                <img src="uploaded_img/<?php echo $fetch_edit['Item_img']; ?>" height="200" alt="">-->
+<!--                                <img src="uploaded_img/<?php echo $fetch_edit['image_path']; ?>" height="200" alt="">-->
                                 <input type="hidden" name="update_p_id" value="<?php echo $fetch_edit['ItemID']; ?>">
                                 <input type="text" class="box" required name="update_p_name" value="<?php echo $fetch_edit['ItemName']; ?>" >
                                 <input type="text" class="box" required name="update_p_desc" value="<?php echo $fetch_edit['ItemDesc']; ?>" >

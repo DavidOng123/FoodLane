@@ -169,7 +169,7 @@
                                             <br>
                                             <br>
 
-                                            <table class="table table-striped table-bordered" id="order_table">
+                                            <table class="table table-striped table-bordered" id="orders">
                                                 <thead>
                                                     <tr>
                                                         <th>Reservation ID</th>

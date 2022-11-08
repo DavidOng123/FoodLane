@@ -18,9 +18,9 @@ $result = mysqli_query($con, $s);
 $num = mysqli_num_rows($result);
 
 if($num == 1){
-    header('location: login.php');
-}else{
     header('location: index.php');
+}else{
+    header('location: login.php');
     }
 }
 ?> 

@@ -147,10 +147,12 @@ if(isset($_GET['delete_all'])){
 <body>
 
 <?php require_once 'header.php' ?>
+            <br>
+            <br>
     
     <div class="container">
         <section class="shopping-cart">
-            <br>
+
             <h3 class="heading">Shopping Cart</h3>
             
             <table>
@@ -207,7 +209,7 @@ if(isset($_GET['delete_all'])){
                 </table>
             
              <div class="checkout-btn">
-                <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">procced to checkout</a>
+                <a href="checkout.php" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
                 <br>
                 <br>
                 <tr>

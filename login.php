@@ -187,7 +187,7 @@ require 'db.php';
 				<h2>Sign In</h2>
 				<div class="form-row">
 					<label for="your-email">Your Email</label>
-					<input type="text" name="Email" id="Email" class="input-text" placeholder="Your Email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+					<input type="text" name="email" id="email" class="input-text" placeholder="Your Email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
 					<i class="fas fa-envelope"></i>
 				</div>
 				<div class="form-row">

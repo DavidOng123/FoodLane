@@ -55,7 +55,7 @@ if (isset($_POST['update'])){
    <style>
 
         .row {
-        --bs-gutter-x: 1.rem;
+        --bs-gutter-x: 1 rem;
         }
 
         body{
