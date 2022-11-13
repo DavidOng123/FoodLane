@@ -133,7 +133,7 @@ select::-ms-expand {
        </select>
   </label>
             <center>
-                <button class="button" type="submit" style="width:70%;"><i class="icon ion-md-lock"></i>Next</button>
+                <button class="button" name="next" type="submit" style="width:70%;"><i class="icon ion-md-lock"></i>Next</button>
   </center>
   
             

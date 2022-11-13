@@ -16,7 +16,34 @@
 
 
 <body style="background:#808080" >
-
+<?php if (isset($_SESSION['Login']) && $_SESSION['Login']==true){?>
+    <header>
+    <div class="nav-bar">
+      <a href="" class="logo">FoodLane</a>
+      <div class="navigation">
+        <div class="nav-items">
+          <i class="uil uil-times nav-close-btn"></i>
+          <a href="index.php"><i class="uil uil-home"></i> Home</a>
+          <a href="reservation.php"><i class="uil uil-info-circle"></i> Reservation</a>
+          <a href="shop.php"><i class="uil uil-document-layout-left"></i> Shop</a>
+          <a href="cart.php"><i class="uil uil-trolley"></i> Cart</a>
+          <a href="team.php"><i class="uil uil-compass"></i> About</a>
+          <a href="customerService.php"><i class="uil uil-envelope"></i> Contact Us</a>
+          <a href="profile.php"><i class="bi bi-person-circle"></i>Profile </a>
+       </div>
+      </div>
+      <i class="uil uil-apps nav-menu-btn"></i>
+    </div>
+      
+      
+    <div class="scroll-indicator-container">
+      <div class="scroll-indicator-bar"></div>
+    </div>
+      
+  </header>
+    <br>
+  
+<?php } else {?>
   <header>
     <div class="nav-bar">
       <a href="" class="logo">FoodLane</a>
@@ -41,8 +68,9 @@
     </div>
       
   </header>
-    
     <br>
+<?php }?>
+    
 
     
     
