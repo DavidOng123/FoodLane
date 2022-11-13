@@ -2,6 +2,15 @@
 <?php
     require_once ('Fetch API.php');
     $API=new FetchAPI();
+    session_start();
+    if($_SERVER['REQUEST_METHOD']=="POST"){
+                    $time=$_POST['time'];
+                    $pax=$_POST['pax'];
+                    $date=$_POST['date'];
+                    $name=$_POST['name'];
+                    $email=$_POST['email'];
+    $phone=$_POST['phone'];
+    
     ?>
 <html>
 <head>
@@ -274,10 +283,7 @@
  <?php  
                     
                    
-                    $date= $_POST['date'];
-                    $time=$_POST['time'];
-                    $pax=$_POST['pax'];
-                    $date=$_POST['date'];
+                   
                     
                     
                     $array= json_decode($API->getReservation(),true);
@@ -434,25 +440,36 @@
                         }
                     
                     
-                    </script><?php }?>
+    </script><?php }}?>
                     
                     
-                    <center><p>You have selected the tables of<span id="tableNo"></span>.<p></center>
+                   
                     
-                    <center><button class="button">Submit</button></center>
-                    <center><button class="button-cancel">Cancel</button></center>
- 
+                    <form method="post" action="insert.php">
+                        <center><p>You have selected the tables of <input type="text" id="tableNo" name="tableNo"  readonly>.<p></center>
+                        <input type="hidden" name="name" value="<?php  echo $name?>"/>
+                        <input type="hidden" name="email" value="<?php  echo $email?>"/>
+                        <input type="hidden" name="phone" value="<?php  echo $phone?>"/>
+                        <input type="hidden" name="date" value="<?php  echo $date?>"/>
+                        <input type="hidden" name="time" value="<?php  echo $time?>"/>
+                        <input type="hidden" name="pax" value="<?php  echo $pax?>"/>
+                        
+                        <center><input type="submit" class="button" name="Submit" value="Submit"/></center>
+                        
+                    </form>
+    <center><button onclick="window.location.href='reservation.php'" class="button-cancel" name="Cancel">Cancel</button></center>
     <script>
         var data=<?php echo json_encode($API->getReservation());?>;
         const floorplan_container=document.querySelector('.floorplan-container');
         const seats=document.querySelectorAll('.seat.available');
         const available_twin=document.querySelectorAll('.twin-seat.available');
-        
+        var tableNum;
         const tableNo=document.getElementById('tableNo');
         function updateSelectedCount(x){
             const selectedSeats=document.querySelectorAll('.row .seat.selected');
-           
-            tableNo.innerText=" "+x;
+           tableNum=x;
+            tableNo.innerText=" "+tableNum;
+            tableNo.value=tableNum;
         
             console.log(tableNo.innerText);
             
@@ -481,12 +498,10 @@
            
         });
     
-        
-        
-        
-      
+       
 
     </script>
     </a>
+    
 </body>
 </html>

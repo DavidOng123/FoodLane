@@ -465,7 +465,7 @@
                   <div class="image table"></div>
                   <div class="caption">
                         <h1>RESERVATION TABLE</h1>
-                        <a class="button" href="#">BOOK NOW</a>
+                        <a class="button" href="reservation.php">BOOK NOW</a>
                   </div>
             </div>
           

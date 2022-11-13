@@ -2,7 +2,7 @@
 session_start();
 //header('location: login.php');
 
-$con = mysqli_connect("localhost","root","","foodlane", 3307);
+$con = mysqli_connect("localhost","root","","foodlane");
 //mysqli_select_db($con, 'foodlane');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -24,9 +24,10 @@ if($num == 1){
  
     
 }else{
-    $reg = " insert into customer(CustName, email, phone, address, password) values ('$CustName', '$email', '$phone', '$address', '$password')";
+    $reg = " insert into customer(CustName, Email, PhoneNum, Address, PSassword) values ('$CustName', '$email', '$phone', '$address', '$password')";
     mysqli_query($con, $reg);
     $_SESSION['status']="Successfully";
+    header('location: login.php');
 }
 
 }
