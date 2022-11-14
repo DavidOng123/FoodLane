@@ -41,7 +41,9 @@ select::-ms-expand {
     
     <body>
          <?php require_once ('header.php'); ?>
+        <br><br><br>
         <div class="modal">
+            
     <div class="modal-content">
         
         <h1>Reservation Form</h1>
