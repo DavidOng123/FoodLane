@@ -131,20 +131,20 @@
     <p class="text-blk section-subhead-text">Creating amazing website 
     </p>
     <div class="responsive-container-block">
+      
       <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
-        <div class="team-card">
+          <div class="team-card">
           <div class="img-wrapper">
-            <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/expert1.png"
-              class="team-img" />
+              <img src="images/David.jpg"
+              class="team-img" style="border-radius: 50%; width:250px"/>
           </div>
-          <p class="text-blk name">Maxwell Doe
+            <br>
+          <p class="text-blk name">David Ong Lip Wei
           </p>
-          <p class="text-blk position">Instructor
+          <p class="text-blk position">Product Owner
           </p>
-          
+         
         </div>
-      </div>
-      <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
         <div class="team-card">
           <div class="img-wrapper">
             <img src="images/teamZC.png"
@@ -172,19 +172,7 @@
           
         </div>
       </div>
-      <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
-        <div class="team-card">
-          <div class="img-wrapper">
-            <img src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/expert2.png"
-              class="team-img" />
-          </div>
-          <p class="text-blk name">Maxwell Doe
-          </p>
-          <p class="text-blk position">Instructor
-          </p>
-          
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>
