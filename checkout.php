@@ -1,6 +1,6 @@
 <?php
 
-include 'db.php';
+include 'server.php';
 
 if(isset($_POST['order_btn'])){
 
@@ -221,63 +221,63 @@ if(isset($_POST['order_btn'])){
 
 <?php include_once 'header.php'; ?>
 
-<div class="container">
+    <div class="container">
 
-<section class="checkout-form">
-    <br>
+        <section class="checkout-form">
+            <br>
 
-   <h3 class="heading">Complete Your Order</h3>
+           <h3 class="heading">Complete Your Order</h3>
 
-   <form action="" method="post">
+           <form action="" method="post">
 
-   <div class="display-order">
-      <?php
-         $select_cart = mysqli_query($con, "SELECT * FROM `cart`");
-         $total = 0;
-         $grand_total = 0;
-         if(mysqli_num_rows($select_cart) > 0){
-            while($fetch_cart = mysqli_fetch_assoc($select_cart)){
-            $total_price = number_format($fetch_cart['Price'] * $fetch_cart['Quantity']);
-            $grand_total = $total += $total_price;
-      ?>
-      <span><?= $fetch_cart['ItemName']; ?>(<?= $fetch_cart['Quantity']; ?>)</span>
-      <?php
-         }
-      }else{
-         echo "<div class='display-order'><span>your cart is empty!</span></div>";
-      }
-      ?>
-      <span class="grand-total"> grand total : $<?= $grand_total; ?>/- </span>
-   </div>
+           <div class="display-order">
+              <?php
+                 $select_cart = mysqli_query($con, "SELECT * FROM `cart`");
+                 $total = 0;
+                 $grand_total = 0;
+                 if(mysqli_num_rows($select_cart) > 0){
+                    while($fetch_cart = mysqli_fetch_assoc($select_cart)){
+                    $total_price = number_format($fetch_cart['Price'] * $fetch_cart['Quantity']);
+                    $grand_total = $total += $total_price;
+              ?>
+              <span><?= $fetch_cart['ItemName']; ?>(<?= $fetch_cart['Quantity']; ?>)</span>
+              <?php
+                 }
+              }else{
+                 echo "<div class='display-order'><span>your cart is empty!</span></div>";
+              }
+              ?>
+              <span class="grand-total"> grand total : $<?= $grand_total; ?>/- </span>
+           </div>
 
-      <div class="flex">
-         <div class="inputBox">
-            <span>Your Name</span>
-            <input type="text" placeholder="Enter your name" name="CustName" required>
-         </div>
-         <div class="inputBox">
-            <span>Your Number</span>
-            <input type="number" placeholder="Enter your number" name="PhoneNum" required>
-         </div>
-         <div class="inputBox">
-            <span>Your Email</span>
-            <input type="email" placeholder="Enter your email" name="Email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
-         </div>
-         <div class="inputBox">
-            <span>Payment Method</span>
-            <select name="method">
-               <option value="cash" selected>Cash</option>
-               <option value="credit cart">Credit Card</option>
-               <option value="paypal">PayPal</option>
-            </select>
-         </div>
-      </div>
-      <input type="submit" value="Order Now" name="order_btn" class="btn">
-   </form>
+              <div class="flex">
+                 <div class="inputBox">
+                    <span>Your Name</span>
+                    <input type="text" placeholder="Enter your name" name="CustName" required>
+                 </div>
+                 <div class="inputBox">
+                    <span>Your Number</span>
+                    <input type="number" placeholder="Enter your number" name="PhoneNum" required>
+                 </div>
+                 <div class="inputBox">
+                    <span>Your Email</span>
+                    <input type="email" placeholder="Enter your email" name="Email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                 </div>
+                 <div class="inputBox">
+                    <span>Payment Method</span>
+                    <select name="method">
+                       <option value="cash" selected>Cash</option>
+                       <option value="credit cart">Credit Card</option>
+                       <option value="paypal">PayPal</option>
+                    </select>
+                 </div>
+              </div>
+              <input type="submit" value="Order Now" name="order_btn" class="btn">
+           </form>
 
-</section>
+        </section>
 
-</div>
+    </div>
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>

@@ -79,7 +79,7 @@
 
 
                    <div class="button mt-2 d-flex flex-row align-items-center">
-                       <form method="post" action="#">
+                       <form method="post" action="">
                            <input type="submit" class="btn btn-sm btn-outline-primary w-100" name="logout" value="Logout"/>
                         </form>
                        

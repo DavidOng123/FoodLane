@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 body {
   font-family: "Open Sans", sans-serif;
   color: #0c0c0c;
-  background-color: #ffffff;
+  background: linear-gradient(to right,#A6BCE8 , #FFC0C0);
   overflow-x: hidden;
 }
 

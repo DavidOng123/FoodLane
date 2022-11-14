@@ -61,7 +61,7 @@
         <button id="close">&times;</button>
         <h3> Register Account Now !  </h3>
         <p>
-            <center>Reserve and buy food with us ! </center>
+            <center>Reserve and buy food with us  ! </center>
         </p>
         <a href="login.php" style="
         display: block;

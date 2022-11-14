@@ -89,7 +89,7 @@ session_start();
     </div>
       
     
-     <?php // require_once ('popup.php'); ?>
+     <?php  require_once ('popup.php'); ?>
     
 
     <?php require_once ('splitscreen.php'); ?>

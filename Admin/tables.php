@@ -196,9 +196,7 @@
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.isConfirmed) {
-
               window.location.href="login.php";
-
             }
           })       
         }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("server_zy.php");
+include("server.php");
 
 
 
@@ -358,7 +358,7 @@ if(isset($_POST['update_product'])){
                                ?>
 
                                <tr>
-                                  <td><img src="images/<?php echo $row['image_path']; ?>" height="100" alt=""></td>
+                                  <td><img src="uploaded_img/<?php echo $row['Item_img']; ?>" height="100" alt=""></td>
                                   <td><?php echo $row['ItemName']; ?></td>
                                   <td><?php echo $row['ItemDesc']; ?></td>
                                   <td><?php echo $row['ItemType']; ?></td>
