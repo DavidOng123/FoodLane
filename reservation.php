@@ -51,7 +51,7 @@ session_start();
     </head>
     
 
-     
+    <body style = "background: linear-gradient(to right,#1F6ED4 , #B9EDF8);">
         <?php require_once ('header.php'); ?>
        
         
