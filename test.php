@@ -34,6 +34,13 @@
             margin: 30px;
             text-align: center;
         }
+        .big-seat{
+           
+            height: 40px;
+            width: 150px;
+            margin: 30px;
+            text-align: center;
+        }
         .seat.unavailable{
             background: #444451;
             
@@ -43,6 +50,17 @@
             
         }
         .seat.selected{
+            background: greenyellow;
+        }
+        .big-seat.unavailable{
+            background: #444451;
+            
+        }
+        .big-seat.available {
+            background: whitesmoke;
+            
+        }
+        .big-seat.selected{
             background: greenyellow;
         }
         .twin-seat{
@@ -123,6 +141,14 @@
             transform: scale(1.2);
         }
         .seat.selected:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        .big-seat.available:hover{
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        .big-seat.selected:hover{
             cursor: pointer;
             transform: scale(1.2);
         }
@@ -279,6 +305,10 @@
                 <div class="seat" data-value="B9"><small>B9</small></div>
                 <div class="twin-seat" data-value="A6"><small>A6</small></div>
             </div>
+        <div class="row">
+                <div class="big-seat" data-value="C1"><small>C1</small></div>
+               
+            </div>
         
     </div>
  <?php  
@@ -405,7 +435,7 @@
                             const reserved_array=[];
                             for(var i=0;i<array.length;i++){
                                 
-                                if(pax_array[i]>2)
+                                if(pax_array[i]>2 && pax_array[i]<=4)
                                 reserved_array.push(new Reserved(pax_array[i],array[i],date_array[i],time_array[i]));
                             }
                             console.log(reserved_array);
@@ -441,6 +471,75 @@
                         }
                     
                     
+    </script><?php }
+    if($pax>4){?>
+                        <script>
+                            class Reserved{
+                              
+                                constructor(pax,tableNo,date,time){
+                                    this.pax=pax;
+                                    this.tableNo=tableNo;
+                                    this.date=date;
+                                    this.time=time;
+                                }
+                                getPax(){
+                                    return this.pax;
+                                }
+                                getTable(){
+                                    return this.tableNo;
+                                }
+                                getDate(){
+                                    return this.date;
+                                }
+                                getTime(){
+                                    return this.time;
+                                }
+                            }
+                            
+                            var array=<?php echo json_encode($occupied)?>;
+                            var time_array=<?php echo json_encode($occupied_time)?>;
+                            var date_array=<?php echo json_encode($occupied_date)?>;
+                            var pax_array=<?php echo json_encode($occupied_pax)?>;
+                            var date=<?php echo json_encode($date)?>;
+                            var time=<?php echo json_encode($time)?>;
+                            let dt=new Date(date+'T'+time);
+                            const reserved_array=[];
+                            for(var i=0;i<array.length;i++){
+                                
+                                if(pax_array[i]>4)
+                                reserved_array.push(new Reserved(pax_array[i],array[i],date_array[i],time_array[i]));
+                            }
+                            console.log(reserved_array);
+                       const seat=document.querySelectorAll('.big-seat');
+                       
+                            for(var y=0;y<reserved_array.length;y++){
+                                
+                                if(reserved_array[y].getDate()==date){
+                                    
+                                    var pre_time=new Date(dt.getTime()-30*60*1000);
+                                    var post_time=new Date(dt.getTime()+30*60*1000);
+                                    var _time=new Date(reserved_array[y].getDate()+'T'+reserved_array[y].getTime());
+                                    
+                                    if(_time.getTime()===pre_time.getTime() || _time.getTime()===post_time.getTime() || _time.getTime()===dt.getTime()){
+                                        for(var a=0;a<seat.length;a++){
+                                            if(seat[a].getAttribute('data-value')==reserved_array[y].getTable()){
+                                                seat[a].classList.toggle('unavailable');}
+                                            }
+                                        }
+                                        
+                                    
+                                }
+                                
+                            
+                        }
+                        
+                    for(var i=0;i<seat.length;i++){
+                    if(!seat[i].classList.contains('unavailable')){
+                            seat[i].classList.toggle('available');
+                    }
+                    
+                        
+                        }
     </script><?php }}?>
                     
                     
@@ -463,6 +562,7 @@
         var data=<?php echo json_encode($API->getReservation());?>;
         const floorplan_container=document.querySelector('.floorplan-container');
         const seats=document.querySelectorAll('.seat.available');
+        const big_seats=document.querySelectorAll('.big-seat.available');
         const available_twin=document.querySelectorAll('.twin-seat.available');
         var tableNum;
         const tableNo=document.getElementById('tableNo');
@@ -480,6 +580,9 @@
             for(var i=0;i<available_twin.length;i++){
                 available_twin[i].classList.toggle('available')
             }
+            for(var i=0;i<big_seats.length;i++){
+                big_seats[i].classList.toggle('available')
+            }
             
             
         }
@@ -496,6 +599,12 @@
                 e.target.classList.toggle('selected');
               updateSelectedCount(e.target.getAttribute('data-value'));
            }
+           if(e.target.classList.contains('big-seat') && !e.target.classList.contains('unavailable')){
+             
+               e.target.classList.toggle('selected');
+               
+              updateSelectedCount(e.target.getAttribute('data-value'));
+           } 
            
         });
     
