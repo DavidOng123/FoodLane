@@ -1,5 +1,7 @@
 <?php 
-include 'db.php';
+include 'server.php';
+session_start();
+
 
 if(isset($_POST['update_update_btn'])){
     $update_value = $_POST['update_quantity'];
@@ -177,7 +179,7 @@ if(isset($_GET['delete_all'])){
                     ?>
                     
                     <tr>
-                        <td><img src="images/<?php echo $fetch_cart['image_path'];?>" height="100" alt=""></td>
+                        <td><img src="Admin/uploaded_img/<?php echo $fetch_cart['image_path'];?>" height="100" alt=""></td>
                         <td><?php echo $fetch_cart['ItemName'];?></td>
                         <td>RM <?php echo number_format($fetch_cart['Price']);?></td>
                         <td>

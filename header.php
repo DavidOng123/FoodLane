@@ -28,7 +28,7 @@
           <a href="shop.php"><i class="uil uil-document-layout-left"></i> Shop</a>
           <a href="cart.php"><i class="uil uil-trolley"></i> Cart</a>
           <a href="team.php"><i class="uil uil-compass"></i> About</a>
-          <a href="customerService.php"><i class="uil uil-envelope"></i> Contact Us</a>
+          <a href="customerService.php"><i class="uil uil-envelope"></i> Customer Service</a>
           <a href="profile.php"><i class="bi bi-person-circle"></i>Profile </a>
        </div>
       </div>
@@ -53,9 +53,9 @@
           <a href="index.php"><i class="uil uil-home"></i> Home</a>
           <a href="reservation.php"><i class="uil uil-info-circle"></i> Reservation</a>
           <a href="shop.php"><i class="uil uil-document-layout-left"></i> Shop</a>
-          <a href="cart.php"><i class="uil uil-trolley"></i> Cart</a>
+          
           <a href="team.php"><i class="uil uil-compass"></i> About</a>
-          <a href="customerService.php"><i class="uil uil-envelope"></i> Contact Us</a>
+          <a href="ContactUs.php"><i class="uil uil-envelope"></i> Contact Us</a>
           <a href="login.php"><i class="bi bi-person-circle"></i>Account </a>
        </div>
       </div>

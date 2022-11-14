@@ -248,7 +248,8 @@
 
 
 
-<body>
+<body style = "background: linear-gradient(to right,#3A7B99 , #FCE1C3);"  >
+
     <br>
     <br>
     <br>

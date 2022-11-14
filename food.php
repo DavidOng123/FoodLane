@@ -1,5 +1,9 @@
 <?php 
-include 'db.php';
+include 'server.php';
+
+
+session_start();
+
 
 if(isset($_POST['add_to_cart'])) {
     $ItemName= $_POST['ItemName'];
@@ -11,7 +15,9 @@ if(isset($_POST['add_to_cart'])) {
     
     if(mysqli_num_rows($select_cart) > 0) {
         $message[] = 'product already added to cart';
-    } else {
+    } 
+    
+    else {
         $insert_query=mysqli_query($con, "INSERT INTO `cart`(ItemName, Quantity, Price, image_path)
         VALUES('$ItemName', '$Quantity', '$Price', '$image_path')");
         $message[] = 'product added to cart successfully';
@@ -22,7 +28,9 @@ if(isset($_POST['add_to_cart'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
+    
     <!-- Important to make website responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -42,12 +50,7 @@ if(isset($_POST['add_to_cart'])) {
     transition: .2s linear;
 }
 
-html{
-    font-size: 62.5%;
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
-    overflow-x: hidden;
-}
+
 
 section{
     padding:2rem 9%;
@@ -150,12 +153,13 @@ section{
 </head>
 
 
-<body>
+<body style = "background: linear-gradient(to right,#71c9ce , #eeeeee);" >
 
 <?php require_once 'header.php' ?>
 
 <section class="products" id="products">
-
+    
+    <br>
     <h1 class="text-center">Food</h1>
     <br>
 
@@ -168,9 +172,10 @@ section{
 
     
         <form action="" method="post">
+            
         <div class="box">
             <div class="image">
-                <img src="images/<?php echo $row['image_path']?>" class="card-img-top" alt="...">
+               <img src="Admin/uploaded_img/<?php echo $row['Item_img']; ?>" height="100" alt="">
                 <div class="icons">
                     <input type='submit' class="cart-btn" value='add to cart' name='add_to_cart'>
                 </div>
@@ -181,7 +186,8 @@ section{
                 <div class="price">RM <?php echo $row ['Price']?>  <input type="number" name="Quantity" name="quantity" min="1" max="5"></div> 
                 <input type="hidden" name="ItemName" value="<?php echo $row['ItemName']?>">
                 <input type="hidden" name="Price" value="<?php echo $row['Price']?>">
-                <input type="hidden" name="image_path" value="<?php echo $row['image_path']?>">
+                <input type="hidden" name="image_path" value="<?php echo $row['Item_img']?>">
+
             </div>
         </div>
     </form>

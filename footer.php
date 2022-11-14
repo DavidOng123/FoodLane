@@ -102,13 +102,13 @@
 
               <ul class="list-unstyled">
                 <li class="mb-2">
-                  <a href="#!" class="text-white"><i class="fa-solid fa-circle"></i> General information</a>
+                  <a href="Admin/login.php" class="text-white"><i class="fa-solid fa-circle"  ></i> Admin</a>
                 </li>
                 <li class="mb-2">
-                  <a href="#!" class="text-white"><i class="fa-solid fa-circle"></i> About the shelter</a>
+                  <a href="#!" class="text-white"><i class="fa-solid fa-circle" style="color: transparent; "></i> </a>
                 </li>
                 <li class="mb-2">
-                  <a href="#!" class="text-white"><i class="fa-solid fa-circle"></i> Statistic data</a>
+                  <a href="#!" class="text-white"><i class="fa-solid fa-circle" style="color: transparent; "></i> </a>
                 </li>
                 
               </ul>
