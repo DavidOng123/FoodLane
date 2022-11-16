@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<?php session_start();?>
+<?php session_start();
+
+    if($_SERVER['REQUEST_METHOD']=="POST")
+        if(isset ($_POST['logout'])){
+            session_destroy();
+            header('location: index.php');
+            exit();
+        }
+    
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -66,7 +75,7 @@
                 <div class="d-flex align-items-center">
 
                     <div class="image">
-                <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" class="rounded" width="155" >
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" class="rounded" width="155" >
                 </div>
 
                 <div class="ml-3 w-100">
@@ -96,15 +105,8 @@
          </div>
     <br>
     <br>
-    <?php 
-    if($_SERVER['REQUEST_METHOD']=="POST")
-        if(isset ($_POST['logout'])){
-            session_destroy();
-            header('location: index.php');
-            exit();
-        }
-    ?>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+    
+</body>
 
 <?php require_once 'footer.php'; ?>
 </html>

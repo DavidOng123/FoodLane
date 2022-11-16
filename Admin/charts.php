@@ -1,5 +1,5 @@
 <?php  
- $connect = mysqli_connect("localhost", "root", "", "foodlane",3307);  
+ $connect = mysqli_connect("localhost", "root", "", "foodlane");  
  $query = "SELECT ItemType, count(*) as number FROM item GROUP BY ItemType";  
  $result = mysqli_query($connect, $query);  
  ?>  

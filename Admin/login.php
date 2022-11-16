@@ -10,8 +10,13 @@ session_start();
             $username = $_POST['username'];
             $password = $_POST['password'];
             
+            
+            if(isset($_POST['g-recaptcha-response'])){
+                 $captcha=$_POST['g-recaptcha-response'];
+            }
+            
 
-            if(!empty($username) && !empty($password) && !is_numeric($username))
+            if(!empty($username) && !empty($password) && !is_numeric($username) && !empty($captcha) )
             {
 
                 //read from database
@@ -82,7 +87,7 @@ session_start();
         icon: 'error',
         title: 'Oops...',
         text: 'Username OR Password incorrect!',
-        footer: '<a href="../customerService.php">Why do I have this issue?</a>'
+        footer: '<a href="../ContactUs.php">Why do I have this issue?</a>'
         })
         </script>
 
@@ -112,14 +117,18 @@ session_start();
                                 <a href="#" style="color: transparent; ">Forgot Password ?</a>
                                 <a href="../index.php">Back To Home</a>
                         </div>
+                        <div class="g-recaptcha" data-sitekey="6LdKo_EgAAAAACV5M1Iv-E3B5OC-mtu3fWb0pQDX"></div>
                         <input type="submit" value="Login" class="btn">
-                       
+                       <br>
                 </form>
+            <br>
         </div>
+        <br>
 
-
+        <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 
         <script>
+            
             const btn = document.querySelector(".btn");
             const formEl = document.querySelector(".form");
 

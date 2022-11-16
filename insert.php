@@ -1,17 +1,16 @@
 <?php
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
-    
-            $time=$_POST['time'];
-            $pax=$_POST['pax'];
-            $date=$_POST['date'];
-            $name=$_POST['name'];
-            $email=$_POST['email'];
-            $phone=$_POST['phone'];
-            $table=$_POST['tableNo'];
+                    $time=$_POST['time'];
+                    $pax=$_POST['pax'];
+                    $date=$_POST['date'];
+                    $name=$_POST['name'];
+                    $email=$_POST['email'];
+$phone=$_POST['phone'];
+$table=$_POST['tableNo'];
 
 
-$sql="INSERT INTO reservation  VALUES('','$pax','$table','$name','$email','$phone','$time','$date')";
+$sql="INSERT INTO reservation  VALUES('','$name','$email','$phone','$pax','$date','$time','$table')";
 
 $host="localhost";
      $dbname="foodlane";

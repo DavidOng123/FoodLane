@@ -162,7 +162,7 @@ include("server.php");
                                     <div class="card-footer d-flex align-items-center justify-content-between">                                      
                                         <a>
                                          <?php
-                                            $query ="SELECT reserve_id FROM reservation ORDER BY reserve_id";
+                                            $query ="SELECT reservationID FROM reservation ORDER BY reservationID";
                                             $query_run = mysqli_query($con,$query);
 
                                             $row = mysqli_num_rows($query_run);
