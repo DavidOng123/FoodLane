@@ -1,5 +1,5 @@
 <?php 
-include 'db.php';
+include 'server.php';
 
 if(isset($_POST['add_to_cart'])) {
     $ItemName= $_POST['ItemName'];
@@ -42,12 +42,7 @@ if(isset($_POST['add_to_cart'])) {
     transition: .2s linear;
 }
 
-html{
-    font-size: 62.5%;
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
-    overflow-x: hidden;
-}
+
 
 section{
     padding:2rem 9%;
@@ -170,7 +165,7 @@ section{
         <form action="" method="post">
         <div class="box">
             <div class="image">
-                <img src="images/<?php echo $row['image_path']?>" class="card-img-top" alt="...">
+                 <img src="Admin/uploaded_img/<?php echo $row['Item_img']; ?>" height="100" alt="">
                 <div class="icons">
                     <input type='submit' class="cart-btn" value='add to cart' name='add_to_cart'>
                 </div>
@@ -181,7 +176,7 @@ section{
                 <div class="price">RM <?php echo $row ['Price']?>  <input type="number" name="Quantity" name="quantity" min="1" max="5"></div> 
                 <input type="hidden" name="ItemName" value="<?php echo $row['ItemName']?>">
                 <input type="hidden" name="Price" value="<?php echo $row['Price']?>">
-                <input type="hidden" name="image_path" value="<?php echo $row['image_path']?>">
+                <input type="hidden" name="image_path" value="<?php echo $row['Item_img']?>">
             </div>
         </div>
     </form>

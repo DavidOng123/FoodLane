@@ -15,7 +15,7 @@ session_start();
                  $captcha=$_POST['g-recaptcha-response'];
             }
             
-
+            //Author : Lee ZhiCheng
             if(!empty($username) && !empty($password) && !is_numeric($username) && !empty($captcha) )
             {
 

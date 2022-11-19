@@ -7,28 +7,30 @@ if(isset($_POST["action"]))
 {
 	if($_POST["action"] == 'fetch')
 	{
-		$order_column = array('reserve_id', 'Pax', 'reserve_date_time');
+		$order_column = array('reservationID', 'pax', 'date','time');
 
 		$main_query = "
-		SELECT reserve_id, SUM(Pax) AS Pax, reserve_date_time 
+		SELECT reservationID, SUM(pax) AS pax, date, time 
 		FROM reservation 
 		";
 
-		$search_query = 'WHERE reserve_date_time <= "'.date('Y-m-d').'" AND ';
+		$search_query = 'WHERE date <= "'.date('Y-m-d').'" AND ';
 
                 
                 if(isset($_POST["start_date"], $_POST["end_date"]) && $_POST["start_date"] != '' && $_POST["end_date"] != '')
 		{
-			$search_query .= 'reserve_date_time >= "'.$_POST["start_date"].'" AND reserve_date_time <= "'.$_POST["end_date"].'" AND ';
+			$search_query .= 'date >= "'.$_POST["start_date"].'" AND date <= "'.$_POST["end_date"].'" AND ';
 		}
                 
                 
+                //Search Function 
 		if(isset($_POST["search"]["value"]))
 		{
-			$search_query .= '(reserve_id LIKE "%'.$_POST["search"]["value"].'%" OR Pax LIKE "%'.$_POST["search"]["value"].'%" OR reserve_date_time LIKE "%'.$_POST["search"]["value"].'%")';
+			$search_query .= '(reservationID LIKE "%'.$_POST["search"]["value"].'%" OR pax LIKE "%'.$_POST["search"]["value"].'%" OR date LIKE "%'.$_POST["search"]["value"].'%")';
 		}
 
-		$group_by_query = " GROUP BY reserve_date_time ";
+                
+		$group_by_query = " GROUP BY date ";
 
 		$order_by_query = "";
 
@@ -38,7 +40,7 @@ if(isset($_POST["action"]))
 		}
 		else
 		{
-			$order_by_query = 'ORDER BY reserve_date_time DESC ';
+			$order_by_query = 'ORDER BY date DESC ';
 		}
 
 		$limit_query = '';
@@ -68,11 +70,13 @@ if(isset($_POST["action"]))
 		{
 			$sub_array = array();
 
-			$sub_array[] = $row['reserve_id'];
+			$sub_array[] = $row['reservationID'];
 
-			$sub_array[] = $row['Pax'];
+			$sub_array[] = $row['pax'];
 
-			$sub_array[] = $row['reserve_date_time'];
+			$sub_array[] = $row['date'];
+                        
+                        $sub_array[] = $row['time'];
 
 			$data[] = $sub_array;
 		}

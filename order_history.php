@@ -51,7 +51,7 @@
     </tr>
   
   <?php
-  include'db.php';
+  include'server.php';
   $get_order_details="SELECT * FROM orders";
   $result_orders=mysqli_query($con, $get_order_details);
   while($row_orders=mysqli_fetch_assoc($result_orders)){
