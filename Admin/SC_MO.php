@@ -1,52 +1,34 @@
-<?php
+<?php 
 session_start();
 include("server.php");
 
 
-
-if(isset($_GET['delete'])){
-   $delete_id = $_GET['delete'];
-   $delete_query = mysqli_query($con, "DELETE FROM `item` WHERE ItemID = $delete_id ") or die('query failed');
-   if($delete_query){
-      $_SESSION['AdminStatus3'] = 'Added Unsuccessfully';          
-   }else{
-      $_SESSION['AdminStatus3'] = 'Added Unsuccessfully';
-   };
-};
-
-
-
 if(isset($_POST['update_product'])){
-   $update_p_id = $_POST['update_p_id'];
-   $update_p_name = $_POST['update_p_name'];
-   $update_p_price = $_POST['update_p_price'];
    
-   $update_p_desc = $_POST['update_p_desc'];
-   $update_p_type = $_POST['update_p_type'];
-   $update_p_quantity = $_POST['update_p_quantity'];
+   $update_p_id = $_POST['update_order_id'];
+   $update_orderStatus = $_POST['update_orderStatus'];
+   $update_paymentStatus = $_POST['update_PaymentStatus'];
    
-   $update_p_image = $_FILES['update_p_image']['name'];
-   $update_p_image_tmp_name = $_FILES['update_p_image']['tmp_name'];
-   $update_p_image_folder = 'images/'.$update_p_image;
 
-   $update_query = mysqli_query($con, "UPDATE `item` SET ItemName = '$update_p_name', Price = '$update_p_price',  ItemDesc = '$update_p_desc', Quantity = '$update_p_quantity', ItemType = '$update_p_type',item_img = '$update_p_image' WHERE ItemID = '$update_p_id'");
+   $update_query = mysqli_query($con, "UPDATE `orders` SET OrderStatus = '$update_orderStatus', PaymentStatus ='$update_paymentStatus' WHERE OrderID = '$update_p_id'");
 
    
    if($update_query){
-      move_uploaded_file($update_p_image_tmp_name, $update_p_image_folder); 
-      header('location:SC_MP.php');
+      
+      header('location:SC_MO.php');
       $_SESSION['AdminStatus4'] = 'Added Unsuccessfully';
 
    }
    
    else{
       $message[] = 'product could not be updated';
-      header('location:SC_MP.php');
+      header('location:SC_MO.php');
    }
 
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,43 +47,15 @@ if(isset($_POST['update_product'])){
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         
         
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+       
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
 
-        
-        <!-- font awesome cdn link  -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <style>
 
-
-
-
-        
-        
-    </head>
-    <script>
-        let menu = document.querySelector('#menu-btn');
-            let navbar = document.querySelector('.header .navbar');
-
-            menu.onclick = () =>{
-               menu.classList.toggle('fa-times');
-               navbar.classList.toggle('active');
-            };
-
-            window.onscroll = () =>{
-               menu.classList.remove('fa-times');
-               navbar.classList.remove('active');
-            };
-
-
-            document.querySelector('#close-edit').onclick = () =>{
-               document.querySelector('.edit-form-container').style.display = 'none';
-               window.location.href = 'SC_MP.php';
-            }; 
-        </script>
-    <style>
-    :root{
+     :root{
        --blue:#2980b9;
        --red:tomato;
        --orange:orange;
@@ -218,12 +172,13 @@ if(isset($_POST['update_product'])){
        text-transform: none;
     }
 
-    </style>
-    
- 
 
+        </style>     
+        
+    </head>
     
-    <body class="sb-nav-fixed" style= "background: linear-gradient(to right,#A6BCE8 , #FFC0C0);">
+    
+    <body class="sb-nav-fixed"  style= "background: linear-gradient(to right,#A6BCE8 , #FFC0C0);">
         
          <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -312,9 +267,11 @@ if(isset($_POST['update_product'])){
             
             
             <div id="layoutSidenav_content">
-                                
-                 <main>
-                     <?php 
+                
+                
+                 <main style= "background: linear-gradient(to right,#9984AF , #FFEFF9);">
+                      
+                    <?php 
                         if(isset($_SESSION['AdminStatus4'])){
                             ?>
                             <script>
@@ -350,7 +307,7 @@ if(isset($_POST['update_product'])){
                     
                      
                     <br>
-                    <h3 style="text-align:center">  <i class="fas fa-tasks"></i> Manage Products</h3>
+                    <h3 style="text-align:center">  <i class="fas fa-tasks"></i> Manage Order Request</h3>
                     <br>
 
                      <div class="container">
@@ -360,33 +317,38 @@ if(isset($_POST['update_product'])){
                          <table>
 
                             <thead>
-                               <th>Item Image</th>
-                               <th>Item Name</th>
-                               <th>Item Description</th>
-                               <th>Item Type</th>
-                               <th>Item Price</th>
-                               <th>Item Quantity</th>
-                               <th>Action</th>
+                               <th>Customer Name</th>
+                               <th>Phone Number</th>
+                               <th>Email</th>
+                               <th>Total Products</th>
+                               <th>Total Price</th>
+                               <th>Method</th>
+                               <th>Order Status</th>
+                               <th>Payment Status</th>
+                               <th>Order Status</th>
+                               
                             </thead>
 
                             <tbody>
                                <?php
 
-                                  $select_products = mysqli_query($con, "SELECT * FROM `item`");
+                                  $select_products = mysqli_query($con, "SELECT * FROM `orders`");
                                   if(mysqli_num_rows($select_products) > 0){
                                      while($row = mysqli_fetch_assoc($select_products)){
                                ?>
 
                                <tr>
-                                  <td><img src="uploaded_img/<?php echo $row['Item_img']; ?>" height="100" alt=""></td>
-                                  <td><?php echo $row['ItemName']; ?></td>
-                                  <td><?php echo $row['ItemDesc']; ?></td>
-                                  <td><?php echo $row['ItemType']; ?></td>
-                                  <td><?php echo $row['Price']; ?></td>
-                                  <td><?php echo $row['Quantity']; ?></td>
-                                  <td>
-                                     <a href="SC_MP.php?delete=<?php echo $row['ItemID']; ?>" class="delete-btn"  onclick="return confirm('are your sure you want to delete this?');"> <i class="fas fa-trash"></i> delete </a>
-                                     <a href="SC_MP.php?edit=<?php echo $row['ItemID']; ?>" class="option-btn"> <i class="fas fa-edit"></i> update </a>
+                                  <td><?php echo $row['CustName']; ?></td>
+                                  <td><?php echo $row['PhoneNum']; ?></td>
+                                  <td><?php echo $row['Email']; ?></td>
+                                  <td><?php echo $row['total_products']; ?></td>
+                                  <td><?php echo $row['total_price']; ?></td>
+                                  <td><?php echo $row['method']; ?></td>
+                                  <td><?php echo $row['OrderStatus']; ?></td>
+                                  <td><?php echo $row['PaymentStatus']; ?></td>
+                                  
+                                  <td>                                    
+                                     <a href="SC_MO.php?edit=<?php echo $row['OrderID']; ?>" class="option-btn"> <i class="fas fa-edit"></i> update </a>
                                   </td>
                                </tr>
 
@@ -410,20 +372,34 @@ if(isset($_POST['update_product'])){
 
                              if(isset($_GET['edit'])){
                                 $edit_id = $_GET['edit'];
-                                $edit_query = mysqli_query($con, "SELECT * FROM `item` WHERE ItemID = $edit_id");
+                                $edit_query = mysqli_query($con, "SELECT * FROM `orders` WHERE OrderID = $edit_id");
                                 if(mysqli_num_rows($edit_query) > 0){
                                    while($fetch_edit = mysqli_fetch_assoc($edit_query)){
                              ?>
 
                              <form action="" method="post" enctype="multipart/form-data">
-<!--                                <img src="uploaded_img/<?php echo $fetch_edit['image_path']; ?>" height="200" alt="">-->
-                                <input type="hidden" name="update_p_id" value="<?php echo $fetch_edit['ItemID']; ?>">
-                                <input type="text" class="box" required name="update_p_name" value="<?php echo $fetch_edit['ItemName']; ?>" >
-                                <input type="text" class="box" required name="update_p_desc" value="<?php echo $fetch_edit['ItemDesc']; ?>" >
-                                <input type="text" class="box" required name="update_p_type" value="<?php echo $fetch_edit['ItemType']; ?>" >
-                                <input type="number" min="0" class="box" required name="update_p_price" value="<?php echo $fetch_edit['Price']; ?>">
-                                <input type="number" min="0" class="box" required name="update_p_quantity" value="<?php echo $fetch_edit['Quantity']; ?>">
-                                <input type="file" class="box" required name="update_p_image" accept="image/png, image/jpg, image/jpeg">
+                                <input type="hidden" name="update_order_id" value="<?php echo $fetch_edit['OrderID']; ?>">
+                                
+                                
+                                <h3>Order Status</h3>
+                                <input type="text" class="box" required name="update_orderStatus"  list="OrderStatus" value="<?php echo $fetch_edit['OrderStatus']; ?>">
+                                <datalist id="OrderStatus">
+                                  <option value="Reject">
+                                  <option value="Approve">
+                                </datalist>
+                                
+                                
+                             
+                                <h3>Payment Status</h3>
+                                <input type="text" class="box" required name="update_PaymentStatus"  list="PaymentStatus" value="<?php echo $fetch_edit['PaymentStatus']; ?>">
+                                <datalist id="PaymentStatus">
+                                  <option value="Reject">
+                                  <option value="Approve">
+                                </datalist>
+                                
+                                
+                                
+                                
                                 <input type="submit" value="Update the Item" name="update_product" class="option-btn">
                                 <input type="reset" value="Cancel" id="close-edit" name="close-edit" class="option-btn">
                              </form>
@@ -438,11 +414,10 @@ if(isset($_POST['update_product'])){
                          </section>
 
                      </div>
+                   
                      
-                     
+                   
                 </main>
-                
-                <br>
                 
                 
                 
@@ -463,18 +438,27 @@ if(isset($_POST['update_product'])){
         </div>
         
         
-        
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="js/datatables-simple-demo.js"></script>
-        
-        <script>
-             
+         <script>
+            let menu = document.querySelector('#menu-btn');
+            let navbar = document.querySelector('.header .navbar');
+
+            menu.onclick = () =>{
+               menu.classList.toggle('fa-times');
+               navbar.classList.toggle('active');
+            };
+
+            window.onscroll = () =>{
+               menu.classList.remove('fa-times');
+               navbar.classList.remove('active');
+            };
+
+
+            document.querySelector('#close-edit').onclick = () =>{
+               document.querySelector('.edit-form-container').style.display = 'none';
+               window.location.href = 'SC_MP.php';
+            }; 
+
             
-          
             function sweetalert(){
             Swal.fire({
             title: 'Are you sure to logout?',
@@ -491,36 +475,7 @@ if(isset($_POST['update_product'])){
             }
           })       
         }
-        
-        
-        
-        
-        let menu = document.querySelector('#menu-btn');
-        let navbar = document.querySelector('.header .navbar');
-
-        menu.onclick = () =>{
-           menu.classList.toggle('fa-times');
-           navbar.classList.toggle('active');
-        };
-
-        window.onscroll = () =>{
-           menu.classList.remove('fa-times');
-           navbar.classList.remove('active');
-        };
-
-
-        document.querySelector('#close-edit').onclick = () =>{
-           document.querySelector('.edit-form-container').style.display = 'none';
-           window.location.href = 'SC_MP.php';
-        }; 
-
-        
-        
-        
         </script>
-        
-        
-        
-        
+       
     </body>
 </html>

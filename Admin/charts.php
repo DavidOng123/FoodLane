@@ -22,7 +22,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         
   
         <!-- Bootstrap CSS -->
@@ -47,7 +46,7 @@
     
    <body class="sb-nav-fixed" style= "background: linear-gradient(to right,#A6BCE8 , #FFC0C0);">
         
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">FOODLANE Admin</a>
             
@@ -89,13 +88,14 @@
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Stock Control
+                                Product Control
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="SC_MP.php">Manage Product</a>
+                                    <a class="nav-link" href="SC_MP.php">Manage Product</a>                                  
                                     <a class="nav-link" href="SC_AP.php">Add Product</a>
+                                     <a class="nav-link" href="SC_MO.php">Manage Order Status</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -106,12 +106,12 @@
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Manage Reservation
+                                        Reservation
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Booking List</a>                                        
+                                            <a class="nav-link" href="bookinglist.php">Booking List</a>                                        
                                         </nav>
                                     </div>
                                   </nav>
@@ -123,7 +123,7 @@
                             </a>
                             <a class="nav-link" href="tables.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
+                                Customer Information
                             </a>
                         </div>
                     </div>
@@ -169,12 +169,13 @@
                                             <br>
                                             <br>
 
-                                            <table class="table table-striped table-bordered" id="orders">
+                                            <table class="table table-striped table-bordered" id="order_table">
                                                 <thead>
                                                     <tr>
                                                         <th>Reservation ID</th>
                                                         <th>Pax</th>
-                                                        <th>Reservation Date & Time</th>
+                                                        <th>Date</th>
+                                                        <th>Time</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -205,14 +206,7 @@
                         
                         
                         
-                        <!--Area Chart-->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                Area Chart Example
-                            </div>
-                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>                          
-                        </div>
+                        
                         
                         
                       
