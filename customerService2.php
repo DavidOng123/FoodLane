@@ -41,7 +41,7 @@ body  {
     
     <!-- Live Chat -->
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-<!--    <div class="elfsight-app-07109f64-bd8a-42b9-9a21-ca7b0d6af95d"></div>-->
+   <div class="elfsight-app-07109f64-bd8a-42b9-9a21-ca7b0d6af95d"></div>
 
     <?php require_once ('footer.php');?>
 </body>
